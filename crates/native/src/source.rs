@@ -9,8 +9,8 @@
 use std::collections::BTreeMap;
 use std::sync::{Mutex, PoisonError};
 
-use appz_core::protocol::{LatestRelease, Source};
-use appz_core::release::{self, Release};
+use artcraft_launcher_core::protocol::{LatestRelease, Source};
+use artcraft_launcher_core::release::{self, Release};
 use serde::{Deserialize, Serialize};
 
 use crate::http::{Fetched, Http};

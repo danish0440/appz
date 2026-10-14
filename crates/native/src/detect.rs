@@ -1,4 +1,4 @@
-//! Finding Z Apps that are already installed, however they got there.
+//! Finding Craft Apps that are already installed, however they got there.
 //!
 //! - macOS: `<App>.app` in `/Applications` or `~/Applications`, read from its `Info.plist`.
 //! - Windows: the Windows Installer's uninstall entries (`Learning Machines LLC`), and portable
@@ -10,7 +10,7 @@
 
 use std::path::{Path, PathBuf};
 
-use appz_core::{CraftApp, InstallSource, Installed, version};
+use artcraft_launcher_core::{CraftApp, InstallSource, Installed, version};
 
 use crate::manifest::Manifest;
 
@@ -72,8 +72,8 @@ fn from_manifest(app: &CraftApp, manifest: &Manifest) -> Option<Installed> {
 
 /// Whether a file name is an AppImage of the app with asset stems `stems`, and the version its
 /// name gives. Matches only the names a release AppImage ends up with: the release's own
-/// (`photoz-0.6.0-linux-x86_64.AppImage`) and the bare app name Gear Lever renames it to
-/// (`photoz.appimage`, version unknown). The extension's case doesn't matter.
+/// (`photocraft-0.6.0-linux-x86_64.AppImage`) and the bare app name Gear Lever renames it to
+/// (`photocraft.appimage`, version unknown). The extension's case doesn't matter.
 #[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 pub(crate) fn appimage_version(name: &str, stems: &[&str]) -> Option<Option<String>> {
     let split = name.len().checked_sub(".appimage".len())?;
@@ -84,8 +84,8 @@ pub(crate) fn appimage_version(name: &str, stems: &[&str]) -> Option<Option<Stri
     if stems.iter().any(|s| base.eq_ignore_ascii_case(s)) {
         return Some(None);
     }
-    let parsed = appz_core::platform::parse_asset_name(&format!("{base}.AppImage"), stems)?;
-    (parsed.kind == appz_core::PackageKind::AppImage && parsed.token.starts_with("linux-")).then_some(Some(parsed.version))
+    let parsed = artcraft_launcher_core::platform::parse_asset_name(&format!("{base}.AppImage"), stems)?;
+    (parsed.kind == artcraft_launcher_core::PackageKind::AppImage && parsed.token.starts_with("linux-")).then_some(Some(parsed.version))
 }
 
 /// Who our Windows Installer packages name as their publisher.
@@ -109,8 +109,8 @@ fn exe_candidates(app: &CraftApp, location: Option<&Path>, program_files: &[Path
     dirs.flat_map(|d| app.stems().map(move |s| d.join(format!("{s}.exe")))).collect()
 }
 
-/// Version from `<app> --version` output. Binaries print the machine id (`photoz 0.7.0`),
-/// the display name (`SoundZ 0.5.0`), or a former id (`printcraft 0.2.1` for PdfZ).
+/// Version from `<app> --version` output. Binaries print the machine id (`photocraft 0.7.0`),
+/// the display name (`SoundCraft 0.5.0`), or a former id (`printcraft 0.2.1` for PdfCraft).
 #[cfg_attr(not(any(target_os = "linux", target_os = "freebsd")), allow(dead_code))]
 fn parse_cli_version(line: &str, app: &CraftApp) -> Option<version::Version> {
     let line = line.trim();
@@ -187,7 +187,7 @@ pub mod windows {
     /// An MSI install found in the registry.
     pub struct MsiInstall {
         pub product_code: String,
-        pub version: Option<appz_core::version::Version>,
+        pub version: Option<artcraft_launcher_core::version::Version>,
         pub exe: Option<PathBuf>,
     }
 
@@ -262,11 +262,11 @@ pub mod linux {
     use crate::packages::{self, Package};
     use crate::process::capture;
 
-    /// Installed Z App packages from every package manager on this system (dpkg, rpm,
+    /// Installed Craft App packages from every package manager on this system (dpkg, rpm,
     /// pacman, Flatpak). Read once per detection pass.
     pub fn packages() -> Vec<Package> {
         let ours = |name: &str| {
-            appz_core::SUITE.iter().any(|a| {
+            artcraft_launcher_core::SUITE.iter().any(|a| {
                 [InstallSource::Deb, InstallSource::Rpm, InstallSource::Pacman, InstallSource::Flatpak]
                     .iter()
                     .any(|m| crate::packages::candidate_names(a, *m).iter().any(|n| n == name))
@@ -294,7 +294,7 @@ pub mod linux {
         if let Some(list) = crate::process::capture_flatpak(&["list", "--app", &arch, "--columns=application,version"], t) {
             let mut flatpaks = packages::parse_flatpak_list(&list);
             // Bundles built from a release tarball often list no version: ask Flatpak directly.
-            for (id, version) in flatpaks.iter_mut().filter(|(id, v)| v.is_empty() && id.starts_with("com.pintaz.")) {
+            for (id, version) in flatpaks.iter_mut().filter(|(id, v)| v.is_empty() && id.starts_with("ai.storyteller.")) {
                 if let Some(v) = crate::process::capture_flatpak(&["info", &arch, id], t).as_deref().and_then(packages::parse_flatpak_info) {
                     *version = v;
                 }
@@ -434,14 +434,14 @@ mod linux_tests {
     #[test]
     fn ours_filter_matches_rpm_packages() {
         let ours = |name: &str| {
-            appz_core::SUITE.iter().any(|a| {
+            artcraft_launcher_core::SUITE.iter().any(|a| {
                 [InstallSource::Deb, InstallSource::Rpm, InstallSource::Pacman, InstallSource::Flatpak]
                     .iter()
                     .any(|m| crate::packages::candidate_names(a, *m).iter().any(|n| n == name))
             })
         };
-        assert!(ours("photoz"));
-        assert!(ours("com.pintaz.photoz"));
+        assert!(ours("photocraft"));
+        assert!(ours("ai.storyteller.photocraft"));
         assert!(!ours("unrelated-package"));
     }
 
@@ -455,10 +455,10 @@ mod linux_tests {
 
     #[test]
     fn reads_binary_version_from_cli() {
-        let photo = CraftApp::by_id("photoz").unwrap();
+        let photo = CraftApp::by_id("photocraft").unwrap();
         let temp_dir = tempfile::tempdir().unwrap();
-        let bin = temp_dir.path().join("photoz");
-        std::fs::write(&bin, "#!/bin/sh\necho 'photoz 0.6.0 (0c72d9542, 2026-10-10)'\n").unwrap();
+        let bin = temp_dir.path().join("photocraft");
+        std::fs::write(&bin, "#!/bin/sh\necho 'photocraft 0.6.0 (0c72d9542, 2026-10-10)'\n").unwrap();
         use std::os::unix::fs::PermissionsExt;
         std::fs::set_permissions(&bin, std::fs::Permissions::from_mode(0o755)).unwrap();
         let ver = linux::binary_version(&bin, photo);
@@ -475,37 +475,37 @@ mod linux_tests {
             std::fs::set_permissions(&bin, std::fs::Permissions::from_mode(0o755)).unwrap();
             bin
         };
-        let sound = write("soundz", "#!/bin/sh\necho 'SoundZ 0.5.0'\n");
-        assert_eq!(linux::binary_version(&sound, CraftApp::by_id("soundz").unwrap()).unwrap().to_string(), "0.5.0");
-        let pdf = write("pdfz", "#!/bin/sh\necho 'printcraft 0.2.1'\n");
-        assert_eq!(linux::binary_version(&pdf, CraftApp::by_id("pdfz").unwrap()).unwrap().to_string(), "0.2.1");
+        let sound = write("soundcraft", "#!/bin/sh\necho 'SoundCraft 0.5.0'\n");
+        assert_eq!(linux::binary_version(&sound, CraftApp::by_id("soundcraft").unwrap()).unwrap().to_string(), "0.5.0");
+        let pdf = write("pdfcraft", "#!/bin/sh\necho 'printcraft 0.2.1'\n");
+        assert_eq!(linux::binary_version(&pdf, CraftApp::by_id("pdfcraft").unwrap()).unwrap().to_string(), "0.2.1");
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use appz_core::SUITE;
+    use artcraft_launcher_core::SUITE;
 
     use super::*;
 
     #[test]
     fn recognises_appimage_names_conservatively() {
-        let pdf = ["pdfz", "printcraft"];
+        let pdf = ["pdfcraft", "printcraft"];
         let v = |n: &str| appimage_version(n, &pdf);
-        assert_eq!(v("pdfz-0.3.0-linux-x86_64.AppImage"), Some(Some("0.3.0".into())));
+        assert_eq!(v("pdfcraft-0.3.0-linux-x86_64.AppImage"), Some(Some("0.3.0".into())));
         assert_eq!(v("printcraft-0.2.1-linux-aarch64.appimage"), Some(Some("0.2.1".into())));
-        assert_eq!(v("pdfz-0.3.0-rc.1-linux-x86_64.AppImage"), Some(Some("0.3.0-rc.1".into())));
+        assert_eq!(v("pdfcraft-0.3.0-rc.1-linux-x86_64.AppImage"), Some(Some("0.3.0-rc.1".into())));
         // Gear Lever's rename, and a plain rename by hand.
-        assert_eq!(v("pdfz.appimage"), Some(None));
-        assert_eq!(v("PdfZ.AppImage"), Some(None));
+        assert_eq!(v("pdfcraft.appimage"), Some(None));
+        assert_eq!(v("PdfCraft.AppImage"), Some(None));
         for other in [
-            "pdfz-0.3.0-linux-x86_64.AppImage.zsync",
-            "pdfz-0.3.0-linux-x86_64.deb",
-            "pdfz-0.3.0-windows-x64.AppImage",
-            "pdfz-cli-0.3.0-linux-x86_64.AppImage",
-            "photoz-0.6.0-linux-x86_64.AppImage",
-            "mypdfz.AppImage",
-            "pdfz-latest.AppImage",
+            "pdfcraft-0.3.0-linux-x86_64.AppImage.zsync",
+            "pdfcraft-0.3.0-linux-x86_64.deb",
+            "pdfcraft-0.3.0-windows-x64.AppImage",
+            "pdfcraft-cli-0.3.0-linux-x86_64.AppImage",
+            "photocraft-0.6.0-linux-x86_64.AppImage",
+            "mypdfcraft.AppImage",
+            "pdfcraft-latest.AppImage",
             ".appimage",
             "x",
         ] {
@@ -515,38 +515,38 @@ mod tests {
 
     #[test]
     fn parse_cli_version_accepts_id_display_name_and_former_id() {
-        let photo = CraftApp::by_id("photoz").unwrap();
-        let sound = CraftApp::by_id("soundz").unwrap();
-        let pdf = CraftApp::by_id("pdfz").unwrap();
-        assert_eq!(parse_cli_version("photoz 0.7.0 (dev build)", photo).unwrap().to_string(), "0.7.0");
-        assert_eq!(parse_cli_version("SoundZ 0.5.0", sound).unwrap().to_string(), "0.5.0");
+        let photo = CraftApp::by_id("photocraft").unwrap();
+        let sound = CraftApp::by_id("soundcraft").unwrap();
+        let pdf = CraftApp::by_id("pdfcraft").unwrap();
+        assert_eq!(parse_cli_version("photocraft 0.7.0 (dev build)", photo).unwrap().to_string(), "0.7.0");
+        assert_eq!(parse_cli_version("SoundCraft 0.5.0", sound).unwrap().to_string(), "0.5.0");
         assert_eq!(parse_cli_version("printcraft 0.2.1", pdf).unwrap().to_string(), "0.2.1");
-        assert_eq!(parse_cli_version("PdfZ 0.6.0", pdf).unwrap().to_string(), "0.6.0");
-        assert!(strip_cli_prefix("photoz-cli 1.0.0", "photoz").is_none());
+        assert_eq!(parse_cli_version("PdfCraft 0.6.0", pdf).unwrap().to_string(), "0.6.0");
+        assert!(strip_cli_prefix("photocraft-cli 1.0.0", "photocraft").is_none());
     }
 
     #[cfg(target_os = "linux")]
     #[test]
     fn finds_appimages_in_every_folder_newest_first() {
-        let app = CraftApp::by_id("photoz").unwrap();
+        let app = CraftApp::by_id("photocraft").unwrap();
         let root = tempfile::tempdir().unwrap();
         let (apps, gear, bin) = (root.path().join("Applications"), root.path().join("AppImages"), root.path().join("bin"));
         for d in [&apps, &gear, &bin] {
             std::fs::create_dir_all(d).unwrap();
         }
-        std::fs::write(apps.join("photoz-0.5.0-linux-x86_64.AppImage"), b"").unwrap();
-        std::fs::write(apps.join("wordz-0.3.0-linux-x86_64.AppImage"), b"").unwrap();
-        std::fs::write(gear.join("photoz.appimage"), b"").unwrap();
-        std::fs::write(bin.join("photoz-0.6.0-linux-x86_64.AppImage"), b"").unwrap();
-        std::fs::create_dir(bin.join("photoz.AppImage")).unwrap();
+        std::fs::write(apps.join("photocraft-0.5.0-linux-x86_64.AppImage"), b"").unwrap();
+        std::fs::write(apps.join("wordcraft-0.3.0-linux-x86_64.AppImage"), b"").unwrap();
+        std::fs::write(gear.join("photocraft.appimage"), b"").unwrap();
+        std::fs::write(bin.join("photocraft-0.6.0-linux-x86_64.AppImage"), b"").unwrap();
+        std::fs::create_dir(bin.join("photocraft.AppImage")).unwrap();
         let found = linux::appimages_in(app, &[apps.clone(), gear.clone(), bin.clone(), root.path().join("missing")]);
         let names: Vec<_> = found.iter().map(|(p, v)| (p.clone(), v.as_ref().map(ToString::to_string))).collect();
         assert_eq!(
             names,
             [
-                (bin.join("photoz-0.6.0-linux-x86_64.AppImage"), Some("0.6.0".to_string())),
-                (apps.join("photoz-0.5.0-linux-x86_64.AppImage"), Some("0.5.0".to_string())),
-                (gear.join("photoz.appimage"), None),
+                (bin.join("photocraft-0.6.0-linux-x86_64.AppImage"), Some("0.6.0".to_string())),
+                (apps.join("photocraft-0.5.0-linux-x86_64.AppImage"), Some("0.5.0".to_string())),
+                (gear.join("photocraft.appimage"), None),
             ]
         );
     }
@@ -558,36 +558,36 @@ mod tests {
     }
 
     #[test]
-    fn pdfz_matches_its_former_printcraft_installer_name() {
-        let pdf = CraftApp::by_id("pdfz").unwrap();
-        assert!(is_installer_entry(pdf, "PrintCraft", LEARNING_MACHINES), "a PrintCraft entry from {LEARNING_MACHINES} should be PdfZ's");
+    fn pdfcraft_matches_its_former_printcraft_installer_name() {
+        let pdf = CraftApp::by_id("pdfcraft").unwrap();
+        assert!(is_installer_entry(pdf, "PrintCraft", LEARNING_MACHINES), "a PrintCraft entry from {LEARNING_MACHINES} should be PdfCraft's");
     }
 
     #[test]
-    fn pdfz_still_matches_its_own_installer_name() {
-        let pdf = CraftApp::by_id("pdfz").unwrap();
-        assert!(is_installer_entry(pdf, "PdfZ", LEARNING_MACHINES));
+    fn pdfcraft_still_matches_its_own_installer_name() {
+        let pdf = CraftApp::by_id("pdfcraft").unwrap();
+        assert!(is_installer_entry(pdf, "PdfCraft", LEARNING_MACHINES));
     }
 
     #[test]
     fn printcraft_entries_match_nothing_else() {
-        let pdf = CraftApp::by_id("pdfz").unwrap();
+        let pdf = CraftApp::by_id("pdfcraft").unwrap();
         assert!(!is_installer_entry(pdf, "PrintCraft", "Some Other Publisher"));
-        assert!(!is_installer_entry(pdf, "PhotoZ", LEARNING_MACHINES));
-        for a in SUITE.iter().filter(|a| a.id != "pdfz") {
+        assert!(!is_installer_entry(pdf, "PhotoCraft", LEARNING_MACHINES));
+        for a in SUITE.iter().filter(|a| a.id != "pdfcraft") {
             assert!(!is_installer_entry(a, "PrintCraft", LEARNING_MACHINES), "PrintCraft matched {}", a.name);
         }
     }
 
     #[test]
-    fn pdfz_exe_is_sought_under_every_name_it_has_shipped_as() {
-        let pdf = CraftApp::by_id("pdfz").unwrap();
+    fn pdfcraft_exe_is_sought_under_every_name_it_has_shipped_as() {
+        let pdf = CraftApp::by_id("pdfcraft").unwrap();
         let location = PathBuf::from(r"D:\Apps\PrintCraft");
         let roots = roots();
-        let mut want = vec![location.join("pdfz.exe"), location.join("printcraft.exe")];
+        let mut want = vec![location.join("pdfcraft.exe"), location.join("printcraft.exe")];
         for root in &roots {
-            for dir in ["PdfZ", "PrintCraft"] {
-                want.push(root.join(dir).join("pdfz.exe"));
+            for dir in ["PdfCraft", "PrintCraft"] {
+                want.push(root.join(dir).join("pdfcraft.exe"));
                 want.push(root.join(dir).join("printcraft.exe"));
             }
         }

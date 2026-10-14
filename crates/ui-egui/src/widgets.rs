@@ -499,7 +499,7 @@ pub fn more_menu<R>(ui: &mut Ui, add_contents: impl FnOnce(&mut Ui) -> R) {
 pub fn social_icons(ui: &mut Ui, size: f32) {
     let t = Tokens::get(ui.ctx());
     let rtl = ui.layout().prefer_right_to_left();
-    let services = appz_core::catalog::SOCIAL;
+    let services = artcraft_launcher_core::catalog::SOCIAL;
     let ordered: Vec<&(&str, &str)> = if rtl { services.iter().rev().collect() } else { services.iter().collect() };
     for (name, url) in ordered {
         let Some(icon) = crate::icons::social(name) else { continue };
@@ -508,7 +508,7 @@ pub fn social_icons(ui: &mut Ui, size: f32) {
         let color = if resp.hovered() { t.ink_strong } else { t.faint };
         egui::Image::new(icon).tint(color).paint_at(ui, rect.shrink(pad));
         resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Link, true, *name));
-        let resp = resp.on_hover_text(crate::i18n::fmt(tl!("{name}"), &[("name", name)])).on_hover_cursor(egui::CursorIcon::PointingHand);
+        let resp = resp.on_hover_text(crate::i18n::fmt(tl!("ArtCraft on {name}"), &[("name", name)])).on_hover_cursor(egui::CursorIcon::PointingHand);
         if resp.clicked() {
             ui.ctx().open_url(egui::OpenUrl::new_tab(*url));
         }
@@ -516,7 +516,7 @@ pub fn social_icons(ui: &mut Ui, size: f32) {
 }
 
 /// An app's name as the site sets it: Archivo, with "Craft" in the app's colour.
-pub fn wordmark(ui: &mut Ui, app: &appz_core::CraftApp, size: f32) -> Response {
+pub fn wordmark(ui: &mut Ui, app: &artcraft_launcher_core::CraftApp, size: f32) -> Response {
     let t = Tokens::get(ui.ctx());
     let (prefix, craft) = app.name.strip_suffix("Craft").map_or((app.name, ""), |p| (p, "Craft"));
     let mut job = egui::text::LayoutJob::default();

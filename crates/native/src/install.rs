@@ -1,4 +1,4 @@
-//! Installing, updating, removing and starting Z Apps.
+//! Installing, updating, removing and starting Craft Apps.
 //!
 //! Apps go where their platform keeps applications, installed the platform's own way:
 //!
@@ -21,9 +21,9 @@
 
 use std::path::{Path, PathBuf};
 
-use appz_core::protocol::{CANCELLED, INSTALL_CANCELLED, JobPhase};
-use appz_core::release::{self, Asset, Release};
-use appz_core::{CraftApp, InstallSource, Installed, PackageKind};
+use artcraft_launcher_core::protocol::{CANCELLED, INSTALL_CANCELLED, JobPhase};
+use artcraft_launcher_core::release::{self, Asset, Release};
+use artcraft_launcher_core::{CraftApp, InstallSource, Installed, PackageKind};
 
 use crate::http::{Http, Stop, Transfer};
 use crate::manifest::Record;
@@ -313,7 +313,7 @@ pub fn launch(app: &CraftApp, installed: &Installed, paths: &Paths) -> Result<()
     .map_err(|e| format!("Couldn't open {}: {e}", app.name))
 }
 
-/// The environment a Z App unpacked by the launcher runs with: its own `HOME` and the XDG
+/// The environment a Craft App unpacked by the launcher runs with: its own `HOME` and the XDG
 /// base directories inside it. Apps read their settings from these, so everything they keep
 /// (settings, projects, caches) stays in that one folder.
 #[cfg(target_os = "linux")]
@@ -328,7 +328,7 @@ fn home_env(home: &Path) -> [(&'static str, PathBuf); 5] {
 }
 
 /// Creates the folders an app unpacked by the launcher expects to find, and links the host's
-/// `~/.vst3` and `~/.clap` (SoundZ's plugin folders) in when they exist, so an app running
+/// `~/.vst3` and `~/.clap` (SoundCraft's plugin folders) in when they exist, so an app running
 /// inside the sandbox still sees the plugins installed on the host. Every failure here is
 /// ignored: the app is worth starting even if its home is not quite ready.
 #[cfg(target_os = "linux")]
@@ -441,7 +441,7 @@ fn turn<'a>(phase: &'a mut dyn FnMut(JobPhase), working: JobPhase) -> impl FnMut
 /// For [`INSTALLER`]: whether the user cancelled the job while it waits.
 #[cfg(any(target_os = "linux", windows))]
 fn cancelled(stop: &Stop) -> impl Fn() -> bool + '_ {
-    || stop.check().is_err_and(|e| e == appz_core::protocol::CANCELLED)
+    || stop.check().is_err_and(|e| e == artcraft_launcher_core::protocol::CANCELLED)
 }
 
 #[cfg(target_os = "linux")]
@@ -449,8 +449,8 @@ pub(crate) mod linux {
     use std::ffi::{OsStr, OsString};
     use std::os::unix::fs::PermissionsExt;
 
-    use appz_core::distro;
-    use appz_core::protocol::CANCELLED;
+    use artcraft_launcher_core::distro;
+    use artcraft_launcher_core::protocol::CANCELLED;
 
     use super::*;
 
@@ -626,7 +626,7 @@ pub(crate) mod linux {
                     remove(&["rpm", "-e"], app.id)
                 }
             }
-            // The package detected (photoz, photoz-bin or photoz-git).
+            // The package detected (photocraft, photocraft-bin or photocraft-git).
             InstallSource::Pacman => remove(&["pacman", "-R", "--noconfirm"], installed.package.as_deref().unwrap_or(app.id)),
             InstallSource::Flatpak => {
                 let id = app.bundle_id();
@@ -734,19 +734,19 @@ pub(crate) mod linux {
     /// The app's 128 px icon, as bundled in `assets/app-icons`.
     fn icon_png(app: &CraftApp) -> Option<&'static [u8]> {
         Some(match app.id {
-            "photoz" => include_bytes!("../../../assets/app-icons/photoz.png"),
-            "vectorz" => include_bytes!("../../../assets/app-icons/vectorz.png"),
-            "filmz" => include_bytes!("../../../assets/app-icons/filmz.png"),
-            "lightz" => include_bytes!("../../../assets/app-icons/lightz.png"),
-            "pdfz" => include_bytes!("../../../assets/app-icons/pdfz.png"),
-            "effectz" => include_bytes!("../../../assets/app-icons/effectz.png"),
-            "designz" => include_bytes!("../../../assets/app-icons/designz.png"),
-            "wordz" => include_bytes!("../../../assets/app-icons/wordz.png"),
-            "deckz" => include_bytes!("../../../assets/app-icons/deckz.png"),
-            "gridz" => include_bytes!("../../../assets/app-icons/gridz.png"),
-            "cadz" => include_bytes!("../../../assets/app-icons/cadz.png"),
-            "soundz" => include_bytes!("../../../assets/app-icons/soundz.png"),
-            "figz" => include_bytes!("../../../assets/app-icons/figz.png"),
+            "photocraft" => include_bytes!("../../../assets/app-icons/photocraft.png"),
+            "vectorcraft" => include_bytes!("../../../assets/app-icons/vectorcraft.png"),
+            "filmcraft" => include_bytes!("../../../assets/app-icons/filmcraft.png"),
+            "lightcraft" => include_bytes!("../../../assets/app-icons/lightcraft.png"),
+            "pdfcraft" => include_bytes!("../../../assets/app-icons/pdfcraft.png"),
+            "effectcraft" => include_bytes!("../../../assets/app-icons/effectcraft.png"),
+            "designcraft" => include_bytes!("../../../assets/app-icons/designcraft.png"),
+            "wordcraft" => include_bytes!("../../../assets/app-icons/wordcraft.png"),
+            "deckcraft" => include_bytes!("../../../assets/app-icons/deckcraft.png"),
+            "gridcraft" => include_bytes!("../../../assets/app-icons/gridcraft.png"),
+            "cadcraft" => include_bytes!("../../../assets/app-icons/cadcraft.png"),
+            "soundcraft" => include_bytes!("../../../assets/app-icons/soundcraft.png"),
+            "figcraft" => include_bytes!("../../../assets/app-icons/figcraft.png"),
             _ => return None,
         })
     }
@@ -844,7 +844,7 @@ pub(crate) mod linux {
 pub mod macos {
     use std::time::Duration;
 
-    use appz_core::version::Version;
+    use artcraft_launcher_core::version::Version;
 
     use super::*;
 
@@ -856,7 +856,7 @@ pub mod macos {
             return Ok(parent);
         }
         let system = PathBuf::from("/Applications");
-        let probe = system.join(".appz-write-test");
+        let probe = system.join(".artcraft-launcher-write-test");
         if std::fs::write(&probe, b"").is_ok() {
             let _ = std::fs::remove_file(&probe);
             return Ok(system);
@@ -866,7 +866,7 @@ pub mod macos {
         Ok(user)
     }
 
-    /// The Apple Developer team that signs every Z App and AppZ (Learning
+    /// The Apple Developer team that signs every Craft App and ArtCraft Launcher (Learning
     /// Machines LLC): the macOS side of the Windows publisher check.
     pub const TEAM_ID: &str = "DJ6XS33FX8";
 
@@ -1157,7 +1157,7 @@ mod freebsd {
 
 #[cfg(windows)]
 pub mod windows {
-    use appz_core::protocol::CANCELLED;
+    use artcraft_launcher_core::protocol::CANCELLED;
 
     use super::*;
 
@@ -1237,10 +1237,10 @@ mod tests {
     #[test]
     fn a_failed_install_keeps_the_download_for_the_next_try() {
         use crate::http::tests::{Reply, body, serve};
-        let app = CraftApp::by_id("wordz").unwrap();
+        let app = CraftApp::by_id("wordcraft").unwrap();
         let (body, sha) = body();
         let (url, requests) = serve(body.clone(), vec![Reply::Full, Reply::Full]);
-        let asset = Asset { name: "wordz-0.3.0-test.pkg".into(), size: body.len() as u64, url, sha256: Some(sha) };
+        let asset = Asset { name: "wordcraft-0.3.0-test.pkg".into(), size: body.len() as u64, url, sha256: Some(sha) };
         let release = Release { assets: vec![asset.clone()], ..Release::default() };
         let dir = tempfile::tempdir().unwrap();
         let paths = Paths::under(dir.path());
@@ -1262,11 +1262,11 @@ mod tests {
     #[test]
     fn a_release_without_a_checksum_is_refused_before_anything_is_fetched() {
         use crate::http::tests::{Reply, body, serve};
-        let app = CraftApp::by_id("wordz").unwrap();
+        let app = CraftApp::by_id("wordcraft").unwrap();
         let (body, _) = body();
         let (url, requests) = serve(body.clone(), vec![Reply::Full]);
         // Neither a per-file digest nor a SHA256SUMS.txt in the release.
-        let asset = Asset { name: "wordz-0.3.1-test.pkg".into(), size: body.len() as u64, url, sha256: None };
+        let asset = Asset { name: "wordcraft-0.3.1-test.pkg".into(), size: body.len() as u64, url, sha256: None };
         let release = Release { assets: vec![asset.clone()], ..Release::default() };
         let dir = tempfile::tempdir().unwrap();
         let paths = Paths::under(dir.path());
@@ -1299,29 +1299,29 @@ mod tests {
     #[cfg(unix)]
     #[test]
     fn lays_out_both_freebsd_tarball_styles_like_usr_local() {
-        let app = CraftApp::by_id("wordz").unwrap();
+        let app = CraftApp::by_id("wordcraft").unwrap();
         let dir = tempfile::tempdir().unwrap();
         let tree_style = dir.path().join("tree.tar.gz");
         tarball(
             &tree_style,
-            &["wordz-0.3.0-freebsd-x86_64/bin/wordz", "wordz-0.3.0-freebsd-x86_64/share/applications/com.pintaz.wordz.desktop"],
+            &["wordcraft-0.3.0-freebsd-x86_64/bin/wordcraft", "wordcraft-0.3.0-freebsd-x86_64/share/applications/ai.storyteller.wordcraft.desktop"],
         );
         let flat_style = dir.path().join("flat.tar.gz");
         tarball(
             &flat_style,
             &[
-                "wordz-0.3.0-freebsd-x86_64/wordz",
-                "wordz-0.3.0-freebsd-x86_64/wordz-cli",
-                "wordz-0.3.0-freebsd-x86_64/README.md",
-                "wordz-0.3.0-freebsd-x86_64/com.pintaz.wordz.desktop",
-                "wordz-0.3.0-freebsd-x86_64/com.pintaz.wordz.png",
+                "wordcraft-0.3.0-freebsd-x86_64/wordcraft",
+                "wordcraft-0.3.0-freebsd-x86_64/wordcraft-cli",
+                "wordcraft-0.3.0-freebsd-x86_64/README.md",
+                "wordcraft-0.3.0-freebsd-x86_64/ai.storyteller.wordcraft.desktop",
+                "wordcraft-0.3.0-freebsd-x86_64/ai.storyteller.wordcraft.png",
             ],
         );
         for file in [tree_style, flat_style] {
             let root = tree::unpack(app, &file, &dir.path().join("staging")).unwrap();
             let files = tree::files(&root);
-            assert!(files.contains(&PathBuf::from("bin/wordz")), "{files:?}");
-            assert!(files.contains(&PathBuf::from("share/applications/com.pintaz.wordz.desktop")), "{files:?}");
+            assert!(files.contains(&PathBuf::from("bin/wordcraft")), "{files:?}");
+            assert!(files.contains(&PathBuf::from("share/applications/ai.storyteller.wordcraft.desktop")), "{files:?}");
             assert!(!files.iter().any(|f| f.ends_with("README.md")), "{files:?}");
         }
         let bad = dir.path().join("bad.tar.gz");
@@ -1332,44 +1332,44 @@ mod tests {
     #[cfg(target_os = "linux")]
     #[test]
     fn a_tarball_install_lives_in_the_launchers_folder_and_keeps_the_apps_home() {
-        let app = CraftApp::by_id("wordz").unwrap();
+        let app = CraftApp::by_id("wordcraft").unwrap();
         let dir = tempfile::tempdir().unwrap();
         let paths = Paths::under(dir.path());
-        let file = dir.path().join("wordz-0.3.0-linux-x86_64.tar.gz");
+        let file = dir.path().join("wordcraft-0.3.0-linux-x86_64.tar.gz");
         tarball(
             &file,
             &[
-                "wordz-0.3.0-linux-x86_64/bin/wordz",
-                "wordz-0.3.0-linux-x86_64/bin/wordz-cli",
-                "wordz-0.3.0-linux-x86_64/share/applications/com.pintaz.wordz.desktop",
+                "wordcraft-0.3.0-linux-x86_64/bin/wordcraft",
+                "wordcraft-0.3.0-linux-x86_64/bin/wordcraft-cli",
+                "wordcraft-0.3.0-linux-x86_64/share/applications/ai.storyteller.wordcraft.desktop",
             ],
         );
 
         let bin = linux::install_tree(app, &file, &paths).unwrap();
-        let root = paths.apps().join("wordz");
-        assert_eq!(bin, root.join("bin").join("wordz"));
+        let root = paths.apps().join("wordcraft");
+        assert_eq!(bin, root.join("bin").join("wordcraft"));
         assert!(bin.is_file(), "the app's binary wasn't unpacked");
-        assert!(root.join("share/applications/com.pintaz.wordz.desktop").is_file(), "share/ wasn't unpacked");
-        assert!(!paths.cache.join("wordz.new").exists(), "the staging folder was left behind");
+        assert!(root.join("share/applications/ai.storyteller.wordcraft.desktop").is_file(), "share/ wasn't unpacked");
+        assert!(!paths.cache.join("wordcraft.new").exists(), "the staging folder was left behind");
 
         // The app's own home sits beside the tree, and an update keeps it.
         let home = paths.app_home(app.id);
-        std::fs::create_dir_all(home.join(".config/wordz")).unwrap();
-        std::fs::write(home.join(".config/wordz/settings.toml"), "keep me").unwrap();
+        std::fs::create_dir_all(home.join(".config/wordcraft")).unwrap();
+        std::fs::write(home.join(".config/wordcraft/settings.toml"), "keep me").unwrap();
         linux::install_tree(app, &file, &paths).unwrap();
-        assert_eq!(std::fs::read_to_string(home.join(".config/wordz/settings.toml")).unwrap(), "keep me");
+        assert_eq!(std::fs::read_to_string(home.join(".config/wordcraft/settings.toml")).unwrap(), "keep me");
 
         // Removing the install takes the tree and nothing else.
         linux::remove_tree(app, &paths).unwrap();
         assert!(!bin.exists() && !root.join("share").exists());
-        assert!(home.join(".config/wordz/settings.toml").is_file(), "the app's settings were removed with it");
+        assert!(home.join(".config/wordcraft/settings.toml").is_file(), "the app's settings were removed with it");
         assert!(linux::remove_tree(app, &paths).is_err(), "a second removal says there is nothing there");
     }
 
     #[cfg(target_os = "linux")]
     #[test]
     fn an_app_sees_its_own_home_and_the_xdg_folders_inside_it() {
-        let home = PathBuf::from("/data/apps/photoz/home");
+        let home = PathBuf::from("/data/apps/photocraft/home");
         let env = home_env(&home);
         assert_eq!(env[0], ("HOME", home.clone()));
         for (name, dir) in &env[1..] {
@@ -1485,13 +1485,13 @@ mod tests {
     #[cfg(target_os = "linux")]
     #[test]
     fn adds_and_removes_only_its_own_menu_entry_and_icon() {
-        let app = CraftApp::by_id("wordz").unwrap();
+        let app = CraftApp::by_id("wordcraft").unwrap();
         let root = tempfile::tempdir().unwrap();
         let data = root.path().join("share");
-        let desktop = data.join("applications/com.pintaz.wordz.desktop");
-        let icon = data.join("icons/hicolor/128x128/apps/com.pintaz.wordz.png");
-        let old = root.path().join("My Apps/wordz-0.2.0-linux-x86_64.AppImage");
-        let new = root.path().join("My Apps/wordz-0.3.0-linux-x86_64.AppImage");
+        let desktop = data.join("applications/ai.storyteller.wordcraft.desktop");
+        let icon = data.join("icons/hicolor/128x128/apps/ai.storyteller.wordcraft.png");
+        let old = root.path().join("My Apps/wordcraft-0.2.0-linux-x86_64.AppImage");
+        let new = root.path().join("My Apps/wordcraft-0.3.0-linux-x86_64.AppImage");
         std::fs::create_dir_all(new.parent().unwrap()).unwrap();
         std::fs::write(&new, b"").unwrap();
 
@@ -1499,8 +1499,8 @@ mod tests {
         let files = linux::integrate_into(&data, app, &new, &[], None);
         assert_eq!(files, [icon.clone(), desktop.clone()]);
         let text = std::fs::read_to_string(&desktop).unwrap();
-        assert!(text.contains("Exec=\"") && text.contains("My Apps/wordz-0.3.0-linux-x86_64.AppImage\" %F\n"), "{text}");
-        assert!(text.contains("Icon=com.pintaz.wordz\n"));
+        assert!(text.contains("Exec=\"") && text.contains("My Apps/wordcraft-0.3.0-linux-x86_64.AppImage\" %F\n"), "{text}");
+        assert!(text.contains("Icon=ai.storyteller.wordcraft\n"));
         assert!(std::fs::read(&icon).unwrap().starts_with(b"\x89PNG"));
         let rec = record("0.3.0", PackageKind::AppImage, new.clone(), files, false);
 
@@ -1508,7 +1508,7 @@ mod tests {
         assert_eq!(linux::integrate_into(&data, app, &new, &[], Some(&rec)).len(), 2);
 
         // Someone else's entry and icon are left alone (and not recorded).
-        std::fs::write(&desktop, "[Desktop Entry]\nExec=/usr/bin/wordz\n").unwrap();
+        std::fs::write(&desktop, "[Desktop Entry]\nExec=/usr/bin/wordcraft\n").unwrap();
         std::fs::write(&icon, b"theirs").unwrap();
         assert!(linux::integrate_into(&data, app, &new, &[], None).is_empty());
         assert_eq!(std::fs::read(&icon).unwrap(), b"theirs");
@@ -1531,7 +1531,7 @@ mod tests {
         linux::unintegrate_from(&data, app, &new, Some(&rec));
         assert!(!desktop.exists() && !icon.exists());
         // Someone else's entry survives an uninstall.
-        std::fs::write(&desktop, "[Desktop Entry]\nExec=/usr/bin/wordz\n").unwrap();
+        std::fs::write(&desktop, "[Desktop Entry]\nExec=/usr/bin/wordcraft\n").unwrap();
         linux::unintegrate_from(&data, app, &new, Some(&rec));
         assert!(desktop.exists());
     }
@@ -1613,42 +1613,42 @@ mod tests {
 
     #[cfg(target_os = "macos")]
     mod macos_checks {
-        use appz_core::{SUITE, version};
+        use artcraft_launcher_core::{SUITE, version};
 
         use super::macos::{Expect, TEAM_ID, install_dmg, signed_by};
         use super::*;
 
-        fn photoz() -> &'static CraftApp {
-            SUITE.iter().find(|a| a.id == "photoz").unwrap()
+        fn photocraft() -> &'static CraftApp {
+            SUITE.iter().find(|a| a.id == "photocraft").unwrap()
         }
 
-        /// A minimal `PhotoZ.app` at `dir`, reporting `version`.
+        /// A minimal `PhotoCraft.app` at `dir`, reporting `version`.
         fn bundle(dir: &Path, version: &str) -> PathBuf {
-            let app = dir.join("PhotoZ.app");
+            let app = dir.join("PhotoCraft.app");
             let contents = app.join("Contents");
             std::fs::create_dir_all(contents.join("MacOS")).unwrap();
             std::fs::write(
                 contents.join("Info.plist"),
                 format!(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\"?><plist version=\"1.0\"><dict>\
-                     <key>CFBundleIdentifier</key><string>com.pintaz.photoz</string>\
-                     <key>CFBundleExecutable</key><string>PhotoZ</string>\
+                     <key>CFBundleIdentifier</key><string>ai.storyteller.photocraft</string>\
+                     <key>CFBundleExecutable</key><string>PhotoCraft</string>\
                      <key>CFBundleShortVersionString</key><string>{version}</string></dict></plist>"
                 ),
             )
             .unwrap();
-            std::fs::write(contents.join("MacOS/PhotoZ"), version).unwrap();
+            std::fs::write(contents.join("MacOS/PhotoCraft"), version).unwrap();
             app
         }
 
-        /// A release-style disk image holding a `PhotoZ.app` that reports `version`.
+        /// A release-style disk image holding a `PhotoCraft.app` that reports `version`.
         fn dmg(dir: &Path, version: &str) -> PathBuf {
             let src = dir.join(format!("src-{version}"));
             bundle(&src, version);
-            let dmg = dir.join(format!("photoz-{version}-macos-universal.dmg"));
+            let dmg = dir.join(format!("photocraft-{version}-macos-universal.dmg"));
             let _one_at_a_time = super::macos::DISK_IMAGES.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
             let ok = std::process::Command::new("hdiutil")
-                .args(["create", "-quiet", "-format", "UDZO", "-volname", "PhotoZ", "-srcfolder"])
+                .args(["create", "-quiet", "-format", "UDZO", "-volname", "PhotoCraft", "-srcfolder"])
                 .arg(&src)
                 .arg(&dmg)
                 .status()
@@ -1684,24 +1684,24 @@ mod tests {
             let image = dmg(dir.path(), "0.6.0");
 
             for (release, ok) in [("0.6.0", true), ("0.7.0", false), ("0.6.0-rc.1", true), ("0.5.0", false)] {
-                std::fs::write(current.join("Contents/MacOS/PhotoZ"), "0.5.0").unwrap();
+                std::fs::write(current.join("Contents/MacOS/PhotoCraft"), "0.5.0").unwrap();
                 let want = version::parse(release).unwrap();
                 let expect = Expect { team: None, version: Some(&want) };
-                let result = install_dmg(photoz(), &image, Some(&existing), &paths, &expect);
+                let result = install_dmg(photocraft(), &image, Some(&existing), &paths, &expect);
                 assert_eq!(result.is_ok(), ok, "release {release}: {result:?}");
-                let now = std::fs::read_to_string(current.join("Contents/MacOS/PhotoZ")).unwrap();
+                let now = std::fs::read_to_string(current.join("Contents/MacOS/PhotoCraft")).unwrap();
                 assert_eq!(now, if ok { "0.6.0" } else { "0.5.0" }, "release {release}");
                 if !ok {
                     assert_eq!(result, Err(format!("the app inside isn't version {release}, so it wasn't installed")));
                 }
-                assert!(!apps.join(".PhotoZ.app.partial").exists());
+                assert!(!apps.join(".PhotoCraft.app.partial").exists());
             }
 
             // A bundle that names a pre-release must name the release's.
             let rc = dmg(dir.path(), "0.8.0-rc.2");
             let want = version::parse("0.8.0-rc.1").unwrap();
             let expect = Expect { team: None, version: Some(&want) };
-            assert!(install_dmg(photoz(), &rc, Some(&existing), &paths, &expect).is_err());
+            assert!(install_dmg(photocraft(), &rc, Some(&existing), &paths, &expect).is_err());
         }
 
         #[test]
@@ -1713,18 +1713,18 @@ mod tests {
             let image = dmg(dir.path(), "0.6.0");
             let release = Release { tag: "v0.6.0".into(), version: version::parse("0.6.0"), ..Release::default() };
 
-            let result = install_dmg(photoz(), &image, Some(&existing), &Paths::under(dir.path()), &Expect::release(&release));
+            let result = install_dmg(photocraft(), &image, Some(&existing), &Paths::under(dir.path()), &Expect::release(&release));
             assert_eq!(result, Err("the app isn't signed by its developer, so it wasn't installed".into()));
-            assert_eq!(std::fs::read_to_string(current.join("Contents/MacOS/PhotoZ")).unwrap(), "0.5.0");
-            assert!(!apps.join(".PhotoZ.app.partial").exists());
+            assert_eq!(std::fs::read_to_string(current.join("Contents/MacOS/PhotoCraft")).unwrap(), "0.5.0");
+            assert!(!apps.join(".PhotoCraft.app.partial").exists());
         }
 
-        /// A real release passes. Run with `CRAFT_APP=/path/to/PhotoZ.app cargo test -p
-        /// appz-native -- --ignored a_real_craft_app`.
+        /// A real release passes. Run with `CRAFT_APP=/path/to/PhotoCraft.app cargo test -p
+        /// artcraft-launcher-native -- --ignored a_real_craft_app`.
         #[test]
-        #[ignore = "needs a Z App from a real release"]
+        #[ignore = "needs a Craft App from a real release"]
         fn a_real_craft_app_carries_the_teams_signature() {
-            let app = std::env::var("CRAFT_APP").expect("set CRAFT_APP to a Z App bundle");
+            let app = std::env::var("CRAFT_APP").expect("set CRAFT_APP to a Craft App bundle");
             assert!(signed_by(Path::new(&app), TEAM_ID), "{app} isn't signed by {TEAM_ID}");
         }
     }

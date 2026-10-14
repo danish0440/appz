@@ -24,17 +24,3 @@ Geist Mono font (assets/fonts/GeistMono-Variable.ttf) — SIL Open Font License 
 Craft App Suite app icons (assets/app-icons/*.png) — from each app's repository
 (github.com/storytold/<app>), MIT OR Apache-2.0, Copyright (c) 2026 ArtCraft Team and the <App>
 contributors.
-
-
-----------------------------------------------------------------------------------------
-AppZ (github.com/danish0440/appz)
-
-Based on ArtCraft Launcher by Storytold (ArtCraft), Apache-2.0. Changes by PINTAZ TECHNOLOGIES.
-
-AppZ is a modified version of ArtCraft Launcher (https://github.com/storytold/craft-launcher). Changes made by
-PINTAZ TECHNOLOGIES (Malaysia), applied by .pintaz/rebrand.py on top of each upstream version:
-  - renamed to AppZ (binaries, installers, bundle ids com.pintaz.*, data folders);
-  - the ArtCraft name, wordmark and marks removed (docs/brand/LICENSE-brand.txt), new Z icons;
-  - help/website links point to this fork; the About screen states the credit above;
-  - our own release and upstream-sync workflows (.github/workflows/*-z.yml).
-The licence files (LICENSE-MIT, LICENSE-APACHE) and all upstream copyright notices are unchanged.

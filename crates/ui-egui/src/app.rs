@@ -2,12 +2,12 @@
 
 use std::time::Duration;
 
-use appz_core::protocol::{
+use artcraft_launcher_core::protocol::{
     Backend, BackendOptions, CANCELLED, Capabilities, Command, Event, INSTALL_CANCELLED, JobPhase, LatestRelease, PAUSED, Source,
 };
-use appz_core::release::Release;
-use appz_core::status::AppStatus;
-use appz_core::{Platform, SUITE};
+use artcraft_launcher_core::release::Release;
+use artcraft_launcher_core::status::AppStatus;
+use artcraft_launcher_core::{Platform, SUITE};
 
 use crate::i18n::set_current;
 use crate::model::AppEntry;
@@ -73,7 +73,7 @@ pub(crate) enum Dialog {
     Notes(String),
     ConfirmUninstall(String),
     Settings,
-    LauncherUpdate(appz_core::Release),
+    LauncherUpdate(artcraft_launcher_core::Release),
 }
 
 impl Dialog {
@@ -100,13 +100,13 @@ pub struct LauncherUi {
     pub(crate) rate_limited_until: Option<i64>,
     pub(crate) launcher_update: Option<Release>,
     /// The launcher's own update, while it downloads and installs.
-    pub(crate) launcher_job: Option<appz_core::protocol::JobPhase>,
+    pub(crate) launcher_job: Option<artcraft_launcher_core::protocol::JobPhase>,
     /// The new launcher is in place: quit so it can start.
     restart_requested: bool,
     /// News from ArtCraft's release feed, shown inline until dismissed.
-    pub(crate) announcements: Vec<appz_core::feed::Notice>,
+    pub(crate) announcements: Vec<artcraft_launcher_core::feed::Notice>,
     /// Alerts from the feed, shown as popups until acknowledged.
-    pub(crate) alerts: Vec<appz_core::feed::Notice>,
+    pub(crate) alerts: Vec<artcraft_launcher_core::feed::Notice>,
     pub(crate) search: String,
     pub(crate) toasts: Vec<Toast>,
     pub(crate) dialog: Option<Dialog>,
@@ -337,7 +337,7 @@ impl LauncherUi {
                 true
             }
             Event::Progress { app, phase } => {
-                if app == appz_core::catalog::LAUNCHER_ID {
+                if app == artcraft_launcher_core::catalog::LAUNCHER_ID {
                     self.launcher_job = Some(phase);
                     if matches!(self.dialog, Some(Dialog::LauncherUpdate(_))) {
                         self.dialog = None;
@@ -369,7 +369,7 @@ impl LauncherUi {
                 false
             }
             Event::JobFinished { app, result } => {
-                let launcher = app == appz_core::catalog::LAUNCHER_ID;
+                let launcher = app == artcraft_launcher_core::catalog::LAUNCHER_ID;
                 // What the job was doing when it ended says what a cancellation called off.
                 let last = if launcher { self.launcher_job.take() } else { self.entry(&app).and_then(|e| e.job) };
                 if let Some(e) = self.entry_mut(&app) {
@@ -437,7 +437,7 @@ impl LauncherUi {
         if self.settings.notify {
             let (title, body) = match fresh.as_slice() {
                 [(_, name, v)] => {
-                    let body: String = tl!("Open AppZ to update.").to_string();
+                    let body: String = tl!("Open ArtCraft Launcher to update.").to_string();
                     (crate::i18n::fmt(tl!("{name} {v} is available"), &[("name", name), ("v", v)]), body)
                 }
                 many => {
@@ -475,7 +475,7 @@ impl LauncherUi {
             && let Some(r) = &self.launcher_update
             && self.launcher_job.is_none()
         {
-            let id = appz_core::catalog::LAUNCHER_ID.to_string();
+            let id = artcraft_launcher_core::catalog::LAUNCHER_ID.to_string();
             let v = r.version_label();
             if !self.auto_update_attempted.contains(&(id.clone(), v.clone())) {
                 log::info!("auto-update: queuing launcher self-update to {v}");
@@ -617,24 +617,24 @@ impl LauncherUi {
         list.into_iter().map(|(_, e)| e.app.id).collect()
     }
 
-    /// "release feed", "GitHub" or "release feed and GitHub": the services behind the releases on
+    /// "ArtCraft API", "GitHub" or "ArtCraft API and GitHub": the services behind the releases on
     /// screen right now. `None` until something has loaded.
     pub(crate) fn sources_label(&self) -> Option<String> {
-        use appz_core::protocol::Origin;
+        use artcraft_launcher_core::protocol::Origin;
         let mut api = false;
         let mut github = false;
         for e in &self.entries {
             if matches!(e.latest, Some(LatestRelease::Found(_) | LatestRelease::None)) {
                 match e.origin {
-                    Some(Origin::ZApi) => api = true,
+                    Some(Origin::ArtCraftApi) => api = true,
                     Some(Origin::GitHub) => github = true,
                     None => {}
                 }
             }
         }
         match (api, github) {
-            (true, true) => Some(crate::i18n::fmt(tl!("{a} and {b}"), &[("a", Origin::ZApi.label()), ("b", Origin::GitHub.label())])),
-            (true, false) => Some(Origin::ZApi.label().to_string()),
+            (true, true) => Some(crate::i18n::fmt(tl!("{a} and {b}"), &[("a", Origin::ArtCraftApi.label()), ("b", Origin::GitHub.label())])),
+            (true, false) => Some(Origin::ArtCraftApi.label().to_string()),
             (false, true) => Some(Origin::GitHub.label().to_string()),
             (false, false) => None,
         }

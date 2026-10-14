@@ -1,4 +1,4 @@
-//! The Z App Suite: the thirteen apps the launcher knows about.
+//! The Craft App Suite: the thirteen apps the launcher knows about.
 //!
 //! The list is data so a later version can fetch it from an API; [`SUITE`] is the built-in copy.
 //!
@@ -28,9 +28,9 @@ impl AppGroup {
 /// One app in the suite.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct CraftApp {
-    /// Machine name: repo, binary, package and asset stem (`photoz`).
+    /// Machine name: repo, binary, package and asset stem (`photocraft`).
     pub id: &'static str,
-    /// Display name (`PhotoZ`).
+    /// Display name (`PhotoCraft`).
     pub name: &'static str,
     /// What it's for, in a few words (English; the UI translates it by app id).
     pub tagline: &'static str,
@@ -43,16 +43,16 @@ pub struct CraftApp {
     pub ink_dark: [u8; 3],
     /// GitHub `owner/repo`.
     pub repo: &'static str,
-    /// Older names its release assets may carry (PdfZ shipped as PrintCraft until 0.2.1).
+    /// Older names its release assets may carry (PdfCraft shipped as PrintCraft until 0.2.1).
     pub former_ids: &'static [&'static str],
-    /// Older display names its installers registered (PdfZ's MSI said PrintCraft until 0.2.1).
+    /// Older display names its installers registered (PdfCraft's MSI said PrintCraft until 0.2.1).
     pub former_names: &'static [&'static str],
 }
 
 impl CraftApp {
-    /// `com.pintaz.<id>`: macOS bundle id, Flatpak id and Linux desktop-file id.
+    /// `ai.storyteller.<id>`: macOS bundle id, Flatpak id and Linux desktop-file id.
     pub fn bundle_id(&self) -> String {
-        format!("com.pintaz.{}", self.id)
+        format!("ai.storyteller.{}", self.id)
     }
 
     pub fn releases_url(&self) -> String {
@@ -65,7 +65,7 @@ impl CraftApp {
 
     /// The app's page on getartcraft.com.
     pub fn website(&self) -> String {
-        format!("https://github.com/danish0440/appz", self.id)
+        format!("https://getartcraft.com/apps/{}", self.id)
     }
 
     /// Asset stems this app's releases may use, current first.
@@ -94,147 +94,153 @@ const fn app(
     CraftApp { id, name, tagline, group, color, ink_light, ink_dark, repo, former_ids: &[], former_names: &[] }
 }
 
-/// The Z App Suite, in display order: the seven classic apps, then the six new ones.
+/// The Craft App Suite, in display order: the seven classic apps, then the six new ones.
 pub const SUITE: [CraftApp; 13] = [
     app(
-        "photoz",
-        "PhotoZ",
+        "photocraft",
+        "PhotoCraft",
         "Image editing",
         AppGroup::Classic,
         [[0x2f, 0x7b, 0xf5], [0x1a, 0x5b, 0xc4], [0x7f, 0xb0, 0xff]],
-        "danish0440/photoz",
+        "storytold/photocraft",
     ),
     app(
-        "vectorz",
-        "VectorZ",
+        "vectorcraft",
+        "VectorCraft",
         "Vector illustration",
         AppGroup::Classic,
         [[0xe8, 0x57, 0x3f], [0xb8, 0x3a, 0x24], [0xff, 0x8a, 0x70]],
-        "danish0440/vectorz",
+        "storytold/vectorcraft",
     ),
     app(
-        "filmz",
-        "FilmZ",
+        "filmcraft",
+        "FilmCraft",
         "Video editing, color and sound",
         AppGroup::Classic,
         [[0x8b, 0x5c, 0xf6], [0x6a, 0x3f, 0xd6], [0xb6, 0x9c, 0xff]],
-        "danish0440/filmz",
+        "storytold/filmcraft",
     ),
     app(
-        "lightz",
-        "LightZ",
+        "lightcraft",
+        "LightCraft",
         "Photo library and raw development",
         AppGroup::Classic,
         [[0xf2, 0xa5, 0x16], [0x8a, 0x58, 0x00], [0xff, 0xc1, 0x4d]],
-        "danish0440/lightz",
+        "storytold/lightcraft",
     ),
     CraftApp {
         former_ids: &["printcraft"],
         former_names: &["PrintCraft"],
         ..app(
-            "pdfz",
-            "PdfZ",
+            "pdfcraft",
+            "PdfCraft",
             "Reading, organizing and protecting PDFs",
             AppGroup::Classic,
             [[0x12, 0xa5, 0x8a], [0x0a, 0x75, 0x63], [0x3f, 0xd6, 0xb8]],
-            "danish0440/pdfz",
+            "storytold/pdfcraft",
         )
     },
     app(
-        "effectz",
-        "EffectZ",
+        "effectcraft",
+        "EffectCraft",
         "Motion graphics and visual effects",
         AppGroup::Classic,
         [[0xe0, 0x36, 0x8f], [0xb0, 0x20, 0x6c], [0xff, 0x7a, 0xb8]],
-        "danish0440/effectz",
+        "storytold/effectcraft",
     ),
     app(
-        "designz",
-        "DesignZ",
+        "designcraft",
+        "DesignCraft",
         "Page layout and publishing",
         AppGroup::Classic,
         [[0x7b, 0xb5, 0x1c], [0x45, 0x70, 0x08], [0xa6, 0xe0, 0x4a]],
-        "danish0440/designz",
+        "storytold/designcraft",
     ),
     app(
-        "wordz",
-        "WordZ",
+        "wordcraft",
+        "WordCraft",
         "Writing and document design",
         AppGroup::New,
         [[0x3f, 0x5f, 0xe0], [0x2a, 0x44, 0xb8], [0x8e, 0xa2, 0xff]],
-        "danish0440/wordz",
+        "storytold/wordcraft",
     ),
     app(
-        "deckz",
-        "DeckZ",
+        "deckcraft",
+        "DeckCraft",
         "Presentations and slide shows",
         AppGroup::New,
         [[0xf0, 0x7a, 0x1e], [0xa8, 0x4f, 0x0a], [0xff, 0xa0, 0x60]],
-        "danish0440/deckz",
+        "storytold/deckcraft",
     ),
     app(
-        "gridz",
-        "GridZ",
+        "gridcraft",
+        "GridCraft",
         "Spreadsheets and data",
         AppGroup::New,
         [[0x1f, 0x9d, 0x55], [0x12, 0x70, 0x3a], [0x4f, 0xd6, 0x8a]],
-        "danish0440/gridz",
+        "storytold/gridcraft",
     ),
     app(
-        "cadz",
-        "CadZ",
+        "cadcraft",
+        "CADCraft",
         "Computer-aided design and drafting",
         AppGroup::New,
         [[0x3e, 0xa6, 0xe8], [0x1a, 0x6f, 0xa8], [0x7c, 0xc8, 0xff]],
-        "danish0440/cadz",
+        "storytold/cadcraft",
     ),
     app(
-        "soundz",
-        "SoundZ",
+        "soundcraft",
+        "SoundCraft",
         "Recording, editing and mixing audio",
         AppGroup::New,
         [[0x1f, 0xa5, 0xc9], [0x0e, 0x72, 0x90], [0x5f, 0xd0, 0xee]],
-        "danish0440/soundz",
+        "storytold/soundcraft",
     ),
     app(
-        "figz",
-        "FigZ",
+        "figcraft",
+        "FigCraft",
         "Interface design and prototyping",
         AppGroup::New,
         [[0x02, 0xda, 0x96], [0x04, 0x7a, 0x56], [0x4f, 0xe8, 0xb6]],
-        "danish0440/figz",
+        "storytold/figcraft",
     ),
 ];
 
 /// ArtCraft's website.
-pub const WEBSITE_URL: &str = "https://github.com/danish0440/appz";
-/// The GitHub account every Z App's repository lives under: the only one the launcher
+pub const WEBSITE_URL: &str = "https://getartcraft.com";
+/// The GitHub account every Craft App's repository lives under: the only one the launcher
 /// installs from, whatever the release feed says.
-pub const GITHUB_OWNER: &str = "danish0440";
-/// Source code on GitHub: every Z App's source.
-pub const GITHUB_URL: &str = "https://github.com/danish0440";
+pub const GITHUB_OWNER: &str = "storytold";
+/// ArtCraft on GitHub: every Craft App's source.
+pub const GITHUB_URL: &str = "https://github.com/storytold";
 /// ArtCraft's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
-pub const SOCIAL: [(&str, &str); 0] = []; // PINTAZ: no upstream social accounts
+pub const SOCIAL: [(&str, &str); 5] = [
+    ("X", "https://x.com/get_artcraft"),
+    ("Instagram", "https://www.instagram.com/officialartcraftstudios"),
+    ("LinkedIn", "https://www.linkedin.com/company/artcraft-ai"),
+    ("YouTube", "https://www.youtube.com/@OfficialArtcraftStudios"),
+    ("TikTok", "https://www.tiktok.com/@artcraft.studios"),
+];
 
 /// The ArtCraft community on Discord.
-pub const DISCORD_URL: &str = "https://github.com/danish0440/appz/issues";
+pub const DISCORD_URL: &str = "https://discord.gg/artcraft";
 
-/// AppZ itself, described like a Z App so it can update itself with the same
-/// machinery (asset names `appz-<ver>-…`, bundle id `com.pintaz.appz`,
-/// `AppZ.app`). Not part of [`SUITE`].
+/// ArtCraft Launcher itself, described like a Craft App so it can update itself with the same
+/// machinery (asset names `artcraft-launcher-<ver>-…`, bundle id `ai.storyteller.artcraft-launcher`,
+/// `ArtCraft Launcher.app`). Not part of [`SUITE`].
 pub const LAUNCHER: CraftApp = app(
-    "appz",
-    "AppZ",
-    "Installs and updates the Z App Suite",
+    "artcraft-launcher",
+    "ArtCraft Launcher",
+    "Installs and updates the Craft App Suite",
     AppGroup::New,
     [[0x0b, 0x0b, 0x0c], [0x0b, 0x0b, 0x0c], [0xf2, 0xf1, 0xee]],
-    "danish0440/appz",
+    "storytold/craft-launcher",
 );
 
 /// The launcher's own repo, checked so it can say when a newer launcher is out.
-pub const LAUNCHER_REPO: &str = "danish0440/appz";
+pub const LAUNCHER_REPO: &str = "storytold/craft-launcher";
 /// The launcher's own asset stem.
-pub const LAUNCHER_ID: &str = "appz";
+pub const LAUNCHER_ID: &str = "artcraft-launcher";
 
 #[cfg(test)]
 mod tests {
@@ -255,11 +261,11 @@ mod tests {
     }
 
     #[test]
-    fn pdfz_also_answers_to_printcraft() {
-        let pdf = CraftApp::by_id("pdfz").unwrap();
-        assert_eq!(pdf.stems().collect::<Vec<_>>(), ["pdfz", "printcraft"]);
-        assert_eq!(pdf.names().collect::<Vec<_>>(), ["PdfZ", "PrintCraft"]);
-        assert_eq!(pdf.website(), "https://github.com/danish0440/pdfz");
-        assert_eq!(CraftApp::by_id("wordz").unwrap().website(), "https://github.com/danish0440/wordz");
+    fn pdfcraft_also_answers_to_printcraft() {
+        let pdf = CraftApp::by_id("pdfcraft").unwrap();
+        assert_eq!(pdf.stems().collect::<Vec<_>>(), ["pdfcraft", "printcraft"]);
+        assert_eq!(pdf.names().collect::<Vec<_>>(), ["PdfCraft", "PrintCraft"]);
+        assert_eq!(pdf.website(), "https://getartcraft.com/apps/pdfcraft");
+        assert_eq!(CraftApp::by_id("wordcraft").unwrap().website(), "https://getartcraft.com/apps/wordcraft");
     }
 }

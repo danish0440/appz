@@ -1,4 +1,4 @@
-# Russian (ru) catalog for AppZ.
+# Russian (ru) catalog for ArtCraft Launcher.
 # Format: context<TAB>source<TAB>translation
 # Empty context = plain UI string (tl!, t).
 # @id = command-id keyed (tr_id).
@@ -6,20 +6,20 @@
 # @msg = status/error message template (message, msg).
 # Other context = disambiguation for tr_ctx.
 #
-# Clean-room: written from the meaning of AppZ's English labels in neutral,
+# Clean-room: written from the meaning of ArtCraft Launcher's English labels in neutral,
 # international Russian, using terms Russian-speaking users of creative software know.
 #
 # Coverage: the whole interface — every menu string and tl! literal (complete_menus = true).
-# Left in English on purpose: product name "AppZ" (and its "Launcher" tag), suite
-# name "Z App Suite",
-# app names (PhotoZ, LightZ, FilmZ, DesignZ, VectorZ, PdfZ, EffectZ,
-# WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub", "Discord", "Website".
+# Left in English on purpose: product name "ArtCraft Launcher" (and its "Launcher" tag), suite
+# name "Craft App Suite",
+# app names (PhotoCraft, LightCraft, FilmCraft, DesignCraft, VectorCraft, PdfCraft, EffectCraft,
+# WordCraft, DeckCraft, GridCraft, CADCraft, SoundCraft, FigCraft), "GitHub", "Discord", "Website".
 # Shortcut keys keep their key-cap names (Shift, Alt, Ctrl, Cmd, Esc).
 # Trailing "…" (U+2026) must be preserved. Placeholders {name}, {n}, {version}, {count}, {v},
 # {what}, {unit}, {real}, {e} must appear in translation.
 
 	Launcher	Launcher
-	Z App Suite	Z App Suite
+	Craft App Suite	Craft App Suite
 	Open Source Tools for Creatives, Makers, and Builders	Инструменты с открытым кодом для творцов, мастеров и создателей
 	Settings	Настройки
 	Check for updates	Проверить обновления
@@ -71,7 +71,7 @@
 	Reinstall	Переустановить
 	Uninstall…	Удалить…
 	All releases	Все релизы
-	AppZ {version} is available.	Доступен AppZ {version}.
+	ArtCraft Launcher {version} is available.	Доступен ArtCraft Launcher {version}.
 	Dismiss	Закрыть
 	Update and restart	Обновить и перезапустить
 	A new version is available. Would you like to relaunch with the updated version?	Доступна новая версия. Перезапустить с обновленной версией?
@@ -81,7 +81,7 @@
 	Released {date}	Релиз {date}
 	Open on GitHub	Открыть на GitHub
 	Close	Закрыть
-	AppZ {version}	AppZ {version}
+	ArtCraft Launcher {version}	ArtCraft Launcher {version}
 	Only when I ask	Только по запросу
 	Automatically download and install updates	Автоматически скачивать и устанавливать обновления
 	Notify me when an installed app has an update	Уведомлять, когда у установленного приложения есть обновление
@@ -93,11 +93,11 @@
 	Running in the background	Работа в фоне
 	Keep running in the tray when the window is closed	Оставаться в трее при закрытии окна
 	Show the window on the current desktop	Показывать окно на текущем рабочем столе
-	Start AppZ when I log in	Запускать AppZ при входе в систему
+	Start ArtCraft Launcher when I log in	Запускать ArtCraft Launcher при входе в систему
 	Community	Сообщество
-	Questions, ideas and news	Questions, ideas and news
+	Questions, ideas and news from the ArtCraft team	Вопросы, идеи и новости от команды ArtCraft
 	Appearance	Внешний вид
-	Quit AppZ	Выйти из AppZ
+	Quit ArtCraft Launcher	Выйти из ArtCraft Launcher
 	Done	Готово
 	Uninstall {name}?	Удалить {name}?
 	The app will be moved to the Trash. Your documents and settings stay.	Приложение будет перемещено в Корзину. Ваши документы и настройки сохранятся.
@@ -132,7 +132,7 @@
 	Open link	Открыть ссылку
 	Update	Обновить
 	{name} icon	Значок {name}
-	Loading AppZ…	Загрузка AppZ…
+	Loading ArtCraft Launcher…	Загрузка ArtCraft Launcher…
 	Cancel update	Отменить обновление
 	Stop waiting; the update can be started again later	Не ждать; обновление можно будет запустить позже
 	Download again	Скачать заново
@@ -156,19 +156,19 @@
 	Tarball (.tar.gz)	Архив (.tar.gz)
 
 # Contextual: each app's tagline, keyed by app id
-photoz	Image editing	Редактирование изображений
-vectorz	Vector illustration	Векторная иллюстрация
-filmz	Video editing, color and sound	Монтаж видео, цветокоррекция и звук
-lightz	Photo library and raw development	Фотобиблиотека и проявка RAW
-pdfz	Reading, organizing and protecting PDFs	Чтение, упорядочивание и защита PDF
-effectz	Motion graphics and visual effects	Моушн-графика и визуальные эффекты
-designz	Page layout and publishing	Вёрстка и издательское дело
-wordz	Writing and document design	Тексты и оформление документов
-deckz	Presentations and slide shows	Презентации и слайд-шоу
-gridz	Spreadsheets and data	Электронные таблицы и данные
-cadz	Computer-aided design and drafting	Автоматизированное проектирование и черчение
-soundz	Recording, editing and mixing audio	Запись, редактирование и сведение звука
-figz	Interface design and prototyping	Дизайн интерфейсов и прототипирование
+photocraft	Image editing	Редактирование изображений
+vectorcraft	Vector illustration	Векторная иллюстрация
+filmcraft	Video editing, color and sound	Монтаж видео, цветокоррекция и звук
+lightcraft	Photo library and raw development	Фотобиблиотека и проявка RAW
+pdfcraft	Reading, organizing and protecting PDFs	Чтение, упорядочивание и защита PDF
+effectcraft	Motion graphics and visual effects	Моушн-графика и визуальные эффекты
+designcraft	Page layout and publishing	Вёрстка и издательское дело
+wordcraft	Writing and document design	Тексты и оформление документов
+deckcraft	Presentations and slide shows	Презентации и слайд-шоу
+gridcraft	Spreadsheets and data	Электронные таблицы и данные
+cadcraft	Computer-aided design and drafting	Автоматизированное проектирование и черчение
+soundcraft	Recording, editing and mixing audio	Запись, редактирование и сведение звука
+figcraft	Interface design and prototyping	Дизайн интерфейсов и прототипирование
 
 # Contextual: month abbreviations for date rendering
 month	Jan	янв.
@@ -189,8 +189,8 @@ month	Dec	дек.
 	Installing for {platform}	Установка для {platform}
 	Downloads for {platform}	Скачивание для {platform}
 	No downloads for this system	Нет загрузок для этой системы
-	Get help on GitHub	Get help on GitHub
-	{name}	{name}
+	Join the ArtCraft community on Discord	Присоединиться к сообществу ArtCraft в Discord
+	ArtCraft on {name}	ArtCraft в {name}
 	Couldn't open {name}: {e}	Не удалось открыть {name}: {e}
 	Download cancelled	Скачивание отменено
 	Available to install	Доступно для установки
@@ -210,7 +210,7 @@ month	Dec	дек.
 	Version {version} installed	Версия {version} установлена
 	Version {latest}	Версия {latest}
 	No release published yet	Релиз ещё не опубликован
-	AppZ	AppZ
+	ArtCraft Launcher	ArtCraft Launcher
 	App	Приложение
 	Latest	Последняя
 	Released	Релиз
@@ -230,7 +230,7 @@ month	Dec	дек.
 	Downloads the new version, replaces this one and opens it again	Скачивает новую версию, заменяет текущую и открывает её заново
 	Couldn't check for updates: {f}	Не удалось проверить обновления: {f}
 	GitHub repository	Репозиторий GitHub
-	Upstream	Upstream
+	ArtCraft	ArtCraft
 	Update 1 app	Обновить 1 приложение
 	Update all ({count})	Обновить все ({count})
 	⊞  Grid	⊞  Сетка
@@ -243,7 +243,7 @@ month	Dec	дек.
 	Full changelog	Полный список изменений
 	link	ссылка
 	No apps match	Нет подходящих приложений
-	Open AppZ to update.	Откройте AppZ, чтобы обновить.
+	Open ArtCraft Launcher to update.	Откройте ArtCraft Launcher, чтобы обновить.
 	{name} {v} is available	Доступно обновление {name} {v}
 	{count} updates are available	Доступны обновления ({count})
 	These notes weren't fetched (GitHub's request limit was reached). They're on the release page.	Заметки не были загружены (достигнут лимит запросов GitHub). Они есть на странице релиза.
@@ -294,7 +294,7 @@ filter	Installed	Установлены
 @id	launcher.notes	Что нового
 @id	launcher.dismiss	Закрыть
 @id	settings.open	Настройки
-@id	settings.quit	Выйти из AppZ
+@id	settings.quit	Выйти из ArtCraft Launcher
 @id	view.grid	Сетка
 @id	view.table	Таблица
 @id	filter.all	Все
@@ -307,7 +307,7 @@ filter	Installed	Установлены
 @id	sort.installed	Установленная версия
 @id	sort.latest	Последняя версия
 @id	sort.released	Новый релиз
-@id	help.discord	help.discord
+@id	help.discord	Discord
 @id	help.github	GitHub
 @id	help.website	Веб-сайт
 @id	update.check	Проверить обновления
@@ -317,15 +317,15 @@ filter	Installed	Установлены
 @id	linux.preferred_kind	Устанавливать новые приложения как
 @id	tray.close_to_tray	Оставаться в трее при закрытии окна
 @id	tray.show_on_current_desktop	Показывать окно на текущем рабочем столе
-@id	tray.login_item	Запускать AppZ при входе в систему
+@id	tray.login_item	Запускать ArtCraft Launcher при входе в систему
 @id	appearance.theme	Внешний вид
 
 # Tray (menu bar) menu and tooltip
-	Show AppZ	Показать AppZ
+	Show ArtCraft Launcher	Показать ArtCraft Launcher
 	Check for Updates	Проверить обновления
-	Visit the project page	Visit the project page
-	Source code on GitHub	Source code on GitHub
-	Get help on GitHub	Get help on GitHub
+	Visit getartcraft.com	Открыть getartcraft.com
+	ArtCraft on GitHub	ArtCraft на GitHub
+	Join the ArtCraft Discord	Присоединиться к Discord ArtCraft
 	App details	О приложении
 	Close (Esc)	Закрыть (Esc)
 	Features	Возможности
@@ -339,4 +339,4 @@ filter	Installed	Установлены
 	Next picture (→)	Следующее изображение (→)
 	Loading pictures…	Загрузка изображений…
 	Pictures couldn't be loaded. Reopen this page to try again.	Не удалось загрузить изображения. Откройте страницу снова, чтобы повторить попытку.
-@plural	AppZ · {n} update available|AppZ · {n} updates available	AppZ · {n} обновление|AppZ · {n} обновления|AppZ · {n} обновлений
+@plural	ArtCraft Launcher · {n} update available|ArtCraft Launcher · {n} updates available	ArtCraft Launcher · {n} обновление|ArtCraft Launcher · {n} обновления|ArtCraft Launcher · {n} обновлений

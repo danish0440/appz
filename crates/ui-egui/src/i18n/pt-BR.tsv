@@ -1,4 +1,4 @@
-# Brazilian Portuguese (pt-BR) catalog for AppZ.
+# Brazilian Portuguese (pt-BR) catalog for ArtCraft Launcher.
 # Format: context<TAB>source<TAB>translation
 # Empty context = plain UI string (tl!, t).
 # @id = command-id keyed (tr_id).
@@ -7,7 +7,7 @@
 # Other context = disambiguation for tr_ctx.
 
 	Launcher	Launcher
-	Z App Suite	Z App Suite
+	Craft App Suite	Craft App Suite
 	Open Source Tools for Creatives, Makers, and Builders	Ferramentas de código aberto para criadores, artistas e desenvolvedores
 	Settings	Configurações
 	Check for updates	Verificar atualizações
@@ -61,7 +61,7 @@
 	Reinstall	Reinstalar
 	Uninstall…	Desinstalar…
 	All releases	Todos os lançamentos
-	AppZ {version} is available.	AppZ {version} está disponível.
+	ArtCraft Launcher {version} is available.	ArtCraft Launcher {version} está disponível.
 	Dismiss	Dispensar
 	Update and restart	Atualizar e reiniciar
 	A new version is available. Would you like to relaunch with the updated version?	Uma nova versão está disponível. Reiniciar com a nova versão?
@@ -71,7 +71,7 @@
 	Released {date}	Lançado em {date}
 	Open on GitHub	Abrir no GitHub
 	Close	Fechar
-	AppZ {version}	AppZ {version}
+	ArtCraft Launcher {version}	ArtCraft Launcher {version}
 	Only when I ask	Apenas quando eu pedir
 	Automatically download and install updates	Baixar e instalar atualizações automaticamente
 	Notify me when an installed app has an update	Notificar quando um aplicativo instalado tiver atualização
@@ -83,11 +83,11 @@
 	Running in the background	Execução em segundo plano
 	Keep running in the tray when the window is closed	Continuar na bandeja do sistema ao fechar a janela
 	Show the window on the current desktop	Mostrar a janela na área de trabalho atual
-	Start AppZ when I log in	Iniciar o AppZ ao fazer login
+	Start ArtCraft Launcher when I log in	Iniciar o ArtCraft Launcher ao fazer login
 	Community	Comunidade
-	Questions, ideas and news	Questions, ideas and news
+	Questions, ideas and news from the ArtCraft team	Dúvidas, ideias e novidades da equipe ArtCraft
 	Appearance	Aparência
-	Quit AppZ	Sair do AppZ
+	Quit ArtCraft Launcher	Sair do ArtCraft Launcher
 	Done	Concluído
 	Uninstall {name}?	Desinstalar {name}?
 	The app will be moved to the Trash. Your documents and settings stay.	O aplicativo será movido para a Lixeira. Seus documentos e configurações serão mantidos.
@@ -122,7 +122,7 @@
 	Open link	Abrir link
 	Update	Atualizar
 	{name} icon	Ícone do {name}
-	Loading AppZ…	Carregando AppZ…
+	Loading ArtCraft Launcher…	Carregando ArtCraft Launcher…
 	Cancel update	Cancelar atualização
 	Stop waiting; the update can be started again later	Parar de aguardar; a atualização pode ser iniciada novamente depois
 	Download again	Baixar novamente
@@ -146,19 +146,19 @@
 	Tarball (.tar.gz)	Arquivo (.tar.gz)
 
 # Contextual: each app's tagline, keyed by app id
-photoz	Image editing	Edição de imagens
-vectorz	Vector illustration	Ilustração vetorial
-filmz	Video editing, color and sound	Edição de vídeo, cor e som
-lightz	Photo library and raw development	Biblioteca de fotos e revelação RAW
-pdfz	Reading, organizing and protecting PDFs	Leitura, organização e proteção de PDFs
-effectz	Motion graphics and visual effects	Motion graphics e efeitos visuais
-designz	Page layout and publishing	Diagramação de páginas e publicação
-wordz	Writing and document design	Escrita e design de documentos
-deckz	Presentations and slide shows	Apresentações e slides
-gridz	Spreadsheets and data	Planilhas e dados
-cadz	Computer-aided design and drafting	Desenho técnico e projeto assistido por computador (CAD)
-soundz	Recording, editing and mixing audio	Gravação, edição e mixagem de áudio
-figz	Interface design and prototyping	Design de interfaces e prototipagem
+photocraft	Image editing	Edição de imagens
+vectorcraft	Vector illustration	Ilustração vetorial
+filmcraft	Video editing, color and sound	Edição de vídeo, cor e som
+lightcraft	Photo library and raw development	Biblioteca de fotos e revelação RAW
+pdfcraft	Reading, organizing and protecting PDFs	Leitura, organização e proteção de PDFs
+effectcraft	Motion graphics and visual effects	Motion graphics e efeitos visuais
+designcraft	Page layout and publishing	Diagramação de páginas e publicação
+wordcraft	Writing and document design	Escrita e design de documentos
+deckcraft	Presentations and slide shows	Apresentações e slides
+gridcraft	Spreadsheets and data	Planilhas e dados
+cadcraft	Computer-aided design and drafting	Desenho técnico e projeto assistido por computador (CAD)
+soundcraft	Recording, editing and mixing audio	Gravação, edição e mixagem de áudio
+figcraft	Interface design and prototyping	Design de interfaces e prototipagem
 
 # Contextual: month abbreviations for date rendering
 month	Jan	jan.
@@ -179,8 +179,8 @@ month	Dec	dez.
 	Installing for {platform}	Instalando para {platform}
 	Downloads for {platform}	Downloads para {platform}
 	No downloads for this system	Nenhum download disponível para este sistema
-	Get help on GitHub	Get help on GitHub
-	{name}	{name}
+	Join the ArtCraft community on Discord	Entre na comunidade ArtCraft no Discord
+	ArtCraft on {name}	ArtCraft no {name}
 	Couldn't open {name}: {e}	Não foi possível abrir {name}: {e}
 	Download cancelled	Download cancelado
 	Available to install	Disponível para instalar
@@ -200,7 +200,7 @@ month	Dec	dez.
 	Version {version} installed	Versão {version} instalada
 	Version {latest}	Versão {latest}
 	No release published yet	Nenhum lançamento publicado ainda
-	AppZ	AppZ
+	ArtCraft Launcher	ArtCraft Launcher
 	App	Aplicativo
 	Latest	Última
 	Released	Lançado
@@ -221,7 +221,7 @@ month	Dec	dez.
 	Downloads the new version, replaces this one and opens it again	Baixa a nova versão, substitui a atual e abre novamente
 	Couldn't check for updates: {f}	Não foi possível verificar atualizações: {f}
 	GitHub repository	Repositório no GitHub
-	Upstream	Upstream
+	ArtCraft	ArtCraft
 	Update 1 app	Atualizar 1 aplicativo
 	Update all ({count})	Atualizar todos ({count})
 	⊞  Grid	⊞  Grade
@@ -234,7 +234,7 @@ month	Dec	dez.
 	Full changelog	Histórico completo de alterações
 	link	link
 	No apps match	Nenhum aplicativo encontrado
-	Open AppZ to update.	Abra o AppZ para atualizar.
+	Open ArtCraft Launcher to update.	Abra o ArtCraft Launcher para atualizar.
 	{name} {v} is available	{name} {v} está disponível
 	{count} updates are available	{count} atualizações estão disponíveis
 	These notes weren't fetched (GitHub's request limit was reached). They're on the release page.	Estas notas não foram carregadas (o limite de requisições do GitHub foi atingido). Elas estão na página de lançamentos.
@@ -285,7 +285,7 @@ filter	Installed	Instalados
 @id	launcher.notes	Novidades
 @id	launcher.dismiss	Dispensar
 @id	settings.open	Configurações
-@id	settings.quit	Sair do AppZ
+@id	settings.quit	Sair do ArtCraft Launcher
 @id	view.grid	Grade
 @id	view.table	Tabela
 @id	filter.all	Todos
@@ -299,7 +299,7 @@ filter	Installed	Instalados
 @id	sort.installed	Versão instalada
 @id	sort.latest	Última versão
 @id	sort.released	Lançamento mais recente
-@id	help.discord	help.discord
+@id	help.discord	Discord
 @id	help.github	GitHub
 @id	help.website	Site
 @id	update.check	Verificar atualizações
@@ -309,15 +309,15 @@ filter	Installed	Instalados
 @id	linux.preferred_kind	Instalar novos aplicativos como
 @id	tray.close_to_tray	Continuar na bandeja do sistema ao fechar a janela
 @id	tray.show_on_current_desktop	Mostrar a janela na área de trabalho atual
-@id	tray.login_item	Iniciar o AppZ ao fazer login
+@id	tray.login_item	Iniciar o ArtCraft Launcher ao fazer login
 @id	appearance.theme	Aparência
 
 # Tray (menu bar) menu and tooltip
-	Show AppZ	Mostrar AppZ
+	Show ArtCraft Launcher	Mostrar ArtCraft Launcher
 	Check for Updates	Verificar atualizações
-	Visit the project page	Visit the project page
-	Source code on GitHub	Source code on GitHub
-	Get help on GitHub	Get help on GitHub
+	Visit getartcraft.com	Visitar getartcraft.com
+	ArtCraft on GitHub	ArtCraft no GitHub
+	Join the ArtCraft Discord	Entrar no Discord da ArtCraft
 	App details	Detalhes do aplicativo
 	Close (Esc)	Fechar (Esc)
 	Features	Recursos
@@ -331,4 +331,4 @@ filter	Installed	Instalados
 	Next picture (→)	Próxima imagem (→)
 	Loading pictures…	Carregando imagens…
 	Pictures couldn't be loaded. Reopen this page to try again.	Não foi possível carregar as imagens. Abra a página novamente para tentar de novo.
-@plural	AppZ · {n} update available|AppZ · {n} updates available	AppZ · {n} atualização disponível|AppZ · {n} atualizações disponíveis
+@plural	ArtCraft Launcher · {n} update available|ArtCraft Launcher · {n} updates available	ArtCraft Launcher · {n} atualização disponível|ArtCraft Launcher · {n} atualizações disponíveis

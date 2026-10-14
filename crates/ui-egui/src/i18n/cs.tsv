@@ -1,4 +1,4 @@
-# Czech (cs) catalog for AppZ.
+# Czech (cs) catalog for ArtCraft Launcher.
 # Format: context<TAB>source<TAB>translation
 # Empty context = plain UI string (tl!, t). @id = command-id keyed. @plural = one|few|other.
 # @msg = status/error message template. Other context = disambiguation for tr_ctx.
@@ -6,7 +6,7 @@
 # Product and app names, shortcuts, units, file formats, placeholders and trailing ellipses are kept.
 
 	Launcher	Launcher
-	Z App Suite	Z App Suite
+	Craft App Suite	Craft App Suite
 	Open Source Tools for Creatives, Makers, and Builders	Open-source nástroje pro kreativce, tvůrce a vývojáře
 	Settings	Nastavení
 	Check for updates	Zkontrolovat aktualizace
@@ -60,7 +60,7 @@
 	Reinstall	Znovu nainstalovat
 	Uninstall…	Odinstalovat…
 	All releases	Všechna vydání
-	AppZ {version} is available.	Je k dispozici AppZ {version}.
+	ArtCraft Launcher {version} is available.	Je k dispozici ArtCraft Launcher {version}.
 	Dismiss	Skrýt
 	Update and restart	Aktualizovat a restartovat
 	A new version is available. Would you like to relaunch with the updated version?	Je k dispozici nová verze. Chcete aplikaci znovu spustit s aktualizovanou verzí?
@@ -70,7 +70,7 @@
 	Released {date}	Vydáno {date}
 	Open on GitHub	Otevřít na GitHubu
 	Close	Zavřít
-	AppZ {version}	AppZ {version}
+	ArtCraft Launcher {version}	ArtCraft Launcher {version}
 	Only when I ask	Pouze na vyžádání
 	Automatically download and install updates	Automaticky stahovat a instalovat aktualizace
 	Notify me when an installed app has an update	Upozornit, když má nainstalovaná aplikace aktualizaci
@@ -82,11 +82,11 @@
 	Running in the background	Běh na pozadí
 	Keep running in the tray when the window is closed	Po zavření okna ponechat spuštěné v oznamovací oblasti
 	Show the window on the current desktop	Zobrazit okno na aktuální ploše
-	Start AppZ when I log in	Spouštět AppZ po přihlášení
+	Start ArtCraft Launcher when I log in	Spouštět ArtCraft Launcher po přihlášení
 	Community	Komunita
-	Questions, ideas and news	Questions, ideas and news
+	Questions, ideas and news from the ArtCraft team	Dotazy, nápady a novinky od týmu ArtCraft
 	Appearance	Vzhled
-	Quit AppZ	Ukončit AppZ
+	Quit ArtCraft Launcher	Ukončit ArtCraft Launcher
 	Done	Hotovo
 	Uninstall {name}?	Odinstalovat {name}?
 	The app will be moved to the Trash. Your documents and settings stay.	Aplikace bude přesunuta do Koše. Vaše dokumenty a nastavení zůstanou zachovány.
@@ -120,7 +120,7 @@
 	Open link	Otevřít odkaz
 	Update	Aktualizovat
 	{name} icon	Ikona aplikace {name}
-	Loading AppZ…	Načítání aplikace AppZ…
+	Loading ArtCraft Launcher…	Načítání aplikace ArtCraft Launcher…
 	Cancel update	Zrušit aktualizaci
 	Stop waiting; the update can be started again later	Přestat čekat; aktualizaci lze spustit znovu později
 	Download again	Stáhnout znovu
@@ -140,19 +140,19 @@
 	RPM package (.rpm)	Balíček RPM (.rpm)
 	Flatpak bundle	Balíček Flatpak
 	Tarball (.tar.gz)	Archiv tar (.tar.gz)
-photoz	Image editing	Úpravy obrázků
-vectorz	Vector illustration	Vektorová ilustrace
-filmz	Video editing, color and sound	Střih videa, barvy a zvuk
-lightz	Photo library and raw development	Katalog fotografií a vyvolávání RAW
-pdfz	Reading, organizing and protecting PDFs	Čtení, organizace a ochrana souborů PDF
-effectz	Motion graphics and visual effects	Pohyblivá grafika a vizuální efekty
-designz	Page layout and publishing	Sazba stránek a publikování
-wordz	Writing and document design	Psaní a návrh dokumentů
-deckz	Presentations and slide shows	Prezentace a promítání snímků
-gridz	Spreadsheets and data	Tabulky a data
-cadz	Computer-aided design and drafting	Počítačem podporované navrhování a kreslení
-soundz	Recording, editing and mixing audio	Nahrávání, úpravy a mixování zvuku
-figz	Interface design and prototyping	Návrh rozhraní a prototypování
+photocraft	Image editing	Úpravy obrázků
+vectorcraft	Vector illustration	Vektorová ilustrace
+filmcraft	Video editing, color and sound	Střih videa, barvy a zvuk
+lightcraft	Photo library and raw development	Katalog fotografií a vyvolávání RAW
+pdfcraft	Reading, organizing and protecting PDFs	Čtení, organizace a ochrana souborů PDF
+effectcraft	Motion graphics and visual effects	Pohyblivá grafika a vizuální efekty
+designcraft	Page layout and publishing	Sazba stránek a publikování
+wordcraft	Writing and document design	Psaní a návrh dokumentů
+deckcraft	Presentations and slide shows	Prezentace a promítání snímků
+gridcraft	Spreadsheets and data	Tabulky a data
+cadcraft	Computer-aided design and drafting	Počítačem podporované navrhování a kreslení
+soundcraft	Recording, editing and mixing audio	Nahrávání, úpravy a mixování zvuku
+figcraft	Interface design and prototyping	Návrh rozhraní a prototypování
 month	Jan	1.
 month	Feb	2.
 month	Mar	3.
@@ -171,8 +171,8 @@ month	Dec	12.
 	Installing for {platform}	Instalace pro {platform}
 	Downloads for {platform}	Stažení pro {platform}
 	No downloads for this system	Pro tento systém nejsou k dispozici žádné soubory ke stažení
-	Get help on GitHub	Get help on GitHub
-	{name}	{name}
+	Join the ArtCraft community on Discord	Připojit se ke komunitě ArtCraft na Discordu
+	ArtCraft on {name}	ArtCraft na {name}
 	Couldn't open {name}: {e}	{name} nelze otevřít: {e}
 	Download cancelled	Stahování zrušeno
 	Available to install	K dispozici k instalaci
@@ -192,7 +192,7 @@ month	Dec	12.
 	Version {version} installed	Nainstalována verze {version}
 	Version {latest}	Verze {latest}
 	No release published yet	Zatím nebylo zveřejněno žádné vydání
-	AppZ	AppZ
+	ArtCraft Launcher	ArtCraft Launcher
 	App	Aplikace
 	Latest	Nejnovější
 	Released	Vydáno
@@ -214,7 +214,7 @@ month	Dec	12.
 	Couldn't check for updates: {f}	Aktualizace nelze zkontrolovat: {f}
 	Website (coming soon)	Web (již brzy)
 	GitHub repository	Repozitář na GitHubu
-	Upstream	Upstream
+	ArtCraft	ArtCraft
 	Update 1 app	Aktualizovat 1 aplikaci
 	Update all ({count})	Aktualizovat vše ({count})
 	⊞  Grid	⊞  Mřížka
@@ -227,7 +227,7 @@ month	Dec	12.
 	Full changelog	Úplný přehled změn
 	link	odkaz
 	No apps match	Žádné aplikace neodpovídají hledání
-	Open AppZ to update.	Aktualizujte otevřením aplikace AppZ.
+	Open ArtCraft Launcher to update.	Aktualizujte otevřením aplikace ArtCraft Launcher.
 	{name} {v} is available	Je k dispozici {name} {v}
 	{count} updates are available	Počet dostupných aktualizací: {count}
 	These notes weren't fetched (GitHub's request limit was reached). They're on the release page.	Tyto poznámky se nepodařilo načíst (byl dosažen limit požadavků GitHubu). Najdete je na stránce vydání.
@@ -280,7 +280,7 @@ filter	Installed	Nainstalováno
 @id	launcher.notes	Co je nového
 @id	launcher.dismiss	Zavřít
 @id	settings.open	Nastavení
-@id	settings.quit	Ukončit AppZ
+@id	settings.quit	Ukončit ArtCraft Launcher
 @id	view.grid	Mřížka
 @id	view.table	Tabulka
 @id	filter.all	Vše
@@ -294,7 +294,7 @@ filter	Installed	Nainstalováno
 @id	sort.installed	Nainstalovaná verze
 @id	sort.latest	Nejnovější verze
 @id	sort.released	Nejnovější vydání
-@id	help.discord	help.discord
+@id	help.discord	Discord
 @id	help.github	GitHub
 @id	help.website	Web
 @id	update.check	Zkontrolovat aktualizace
@@ -304,11 +304,11 @@ filter	Installed	Nainstalováno
 @id	linux.preferred_kind	Instalovat nové aplikace jako
 @id	tray.close_to_tray	Po zavření okna ponechat spuštěné v oznamovací oblasti
 @id	tray.show_on_current_desktop	Zobrazit okno na aktuální ploše
-@id	tray.login_item	Spouštět AppZ po přihlášení
+@id	tray.login_item	Spouštět ArtCraft Launcher po přihlášení
 @id	appearance.theme	Vzhled
-	Show AppZ	Zobrazit AppZ
+	Show ArtCraft Launcher	Zobrazit ArtCraft Launcher
 	Check for Updates	Zkontrolovat aktualizace
-	Visit the project page	Visit the project page
-	Source code on GitHub	Source code on GitHub
-	Get help on GitHub	Get help on GitHub
-@plural	AppZ · {n} update available|AppZ · {n} updates available	AppZ · {n} dostupná aktualizace|AppZ · {n} dostupné aktualizace|AppZ · {n} dostupných aktualizací
+	Visit getartcraft.com	Navštívit getartcraft.com
+	ArtCraft on GitHub	ArtCraft na GitHubu
+	Join the ArtCraft Discord	Připojit se na ArtCraft Discord
+@plural	ArtCraft Launcher · {n} update available|ArtCraft Launcher · {n} updates available	ArtCraft Launcher · {n} dostupná aktualizace|ArtCraft Launcher · {n} dostupné aktualizace|ArtCraft Launcher · {n} dostupných aktualizací

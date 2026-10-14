@@ -11,7 +11,7 @@ pub struct Paths {
     pub cache: PathBuf,
 }
 
-const DIR: &str = if cfg!(any(target_os = "macos", target_os = "windows")) { "AppZ" } else { "appz" };
+const DIR: &str = if cfg!(any(target_os = "macos", target_os = "windows")) { "ArtCraft Launcher" } else { "artcraft-launcher" };
 
 impl Paths {
     pub fn new() -> Result<Self, String> {
@@ -49,14 +49,14 @@ impl Paths {
     /// A picture of an app's details page, saved after its first download: under the revision of the
     /// pictures repository it was fetched from, so a new revision never reads an old picture.
     pub fn screenshot(&self, app: &str, key: &str) -> PathBuf {
-        self.cache.join("screenshots").join(appz_core::details::SCREENSHOTS_REV).join(app).join(format!("{key}.jpg"))
+        self.cache.join("screenshots").join(artcraft_launcher_core::details::SCREENSHOTS_REV).join(app).join(format!("{key}.jpg"))
     }
 
     pub fn manifest(&self) -> PathBuf {
         self.data.join("installed.json")
     }
 
-    /// The launcher's own log files (`appz.log` and the previous runs').
+    /// The launcher's own log files (`artcraft-launcher.log` and the previous runs').
     pub fn logs(&self) -> PathBuf {
         self.data.join("logs")
     }
@@ -67,7 +67,7 @@ impl Paths {
     }
 
     /// The folder an app unpacked in [`Self::apps`] sees as its home: `<data>/apps/<app>/home`.
-    /// A Z App keeps its settings in the XDG folders (`~/.config`, `~/.local/share`,
+    /// A Craft App keeps its settings in the XDG folders (`~/.config`, `~/.local/share`,
     /// `~/.cache`), so pointing `HOME` and those variables here keeps every app's configuration
     /// beside it, inside the folder the launcher owns.
     #[cfg(target_os = "linux")]
@@ -86,9 +86,9 @@ pub fn write_atomic(path: &std::path::Path, bytes: &[u8]) -> Result<(), String> 
 }
 
 /// Portable mode: a `portable.txt` beside the executable keeps everything in
-/// `ZLauncherData` next to it (the Windows portable zip ships one).
+/// `ArtCraftLauncherData` next to it (the Windows portable zip ships one).
 pub fn portable_root() -> Option<PathBuf> {
     let exe = std::env::current_exe().ok()?;
     let dir = exe.parent()?;
-    dir.join("portable.txt").is_file().then(|| dir.join("ZLauncherData"))
+    dir.join("portable.txt").is_file().then(|| dir.join("ArtCraftLauncherData"))
 }

@@ -1,4 +1,4 @@
-# Japanese (ja) catalog for ArtCraft Launcher.
+# Japanese (ja) catalog for AppZ.
 # Format: context<TAB>source<TAB>translation
 # Empty context = plain UI string (tl!, t).
 # @id = command-id keyed (tr_id).
@@ -6,15 +6,15 @@
 # @msg = status/error message template (message, msg).
 # Other context = disambiguation for tr_ctx.
 #
-# Clean-room: written from the meaning of ArtCraft Launcher's English labels in neutral Japanese,
+# Clean-room: written from the meaning of AppZ's English labels in neutral Japanese,
 # using the terms Japanese-speaking users of creative software know. The user is addressed with
 # the neutral polite form (です・ます), as in most current Japanese software.
 #
 # Coverage: the whole interface — every menu string and tl! literal (complete_menus = true).
-# Left in English on purpose: product name "ArtCraft Launcher" (and its "Launcher" tag), suite
-# name "Craft App Suite",
-# app names (PhotoCraft, LightCraft, FilmCraft, DesignCraft, VectorCraft, PdfCraft, EffectCraft,
-# WordCraft, DeckCraft, GridCraft, CADCraft, SoundCraft, FigCraft), "GitHub", "Discord".
+# Left in English on purpose: product name "AppZ" (and its "Launcher" tag), suite
+# name "Z App Suite",
+# app names (PhotoZ, LightZ, FilmZ, DesignZ, VectorZ, PdfZ, EffectZ,
+# WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub", "Discord".
 # Shortcut keys keep their key-cap names (Shift, Alt, Ctrl, Cmd, Esc).
 # Trailing "…" (U+2026) must be preserved. Placeholders {name}, {n}, {version}, {count}, {v},
 # {what}, {unit}, {real}, {e} must appear in translation.
@@ -22,7 +22,7 @@
 # system has none, the interface stays in English.
 
 	Launcher	Launcher
-	Craft App Suite	Craft App Suite
+	Z App Suite	Z App Suite
 	Open Source Tools for Creatives, Makers, and Builders	クリエイター、メイカー、ビルダーのためのオープンソースツール
 	Settings	設定
 	Check for updates	更新を確認
@@ -75,7 +75,7 @@
 	Reinstall	再インストール
 	Uninstall…	アンインストール…
 	All releases	すべてのリリース
-	ArtCraft Launcher {version} is available.	ArtCraft Launcher {version} が利用可能です。
+	AppZ {version} is available.	AppZ {version} が利用可能です。
 	Dismiss	閉じる
 	Update and restart	更新して再起動
 	A new version is available. Would you like to relaunch with the updated version?	新しいバージョンがあります。更新後のバージョンで再起動しますか？
@@ -85,7 +85,7 @@
 	Released {date}	{date} 公開
 	Open on GitHub	GitHub で開く
 	Close	閉じる
-	ArtCraft Launcher {version}	ArtCraft Launcher {version}
+	AppZ {version}	AppZ {version}
 	Only when I ask	手動で確認したときのみ
 	Automatically download and install updates	更新を自動でダウンロードしてインストール
 	Notify me when an installed app has an update	インストール済みアプリに更新があるときに通知する
@@ -97,11 +97,11 @@
 	Running in the background	バックグラウンドで実行
 	Keep running in the tray when the window is closed	ウィンドウを閉じてもトレイで実行し続ける
 	Show the window on the current desktop	現在のデスクトップにウィンドウを表示
-	Start ArtCraft Launcher when I log in	ログイン時に ArtCraft Launcher を起動
+	Start AppZ when I log in	ログイン時に AppZ を起動
 	Community	コミュニティ
-	Questions, ideas and news from the ArtCraft team	ArtCraft チームからの質問、アイデア、ニュース
+	Questions, ideas and news	Questions, ideas and news
 	Appearance	外観
-	Quit ArtCraft Launcher	ArtCraft Launcher を終了
+	Quit AppZ	AppZ を終了
 	Done	完了
 	Uninstall {name}?	{name} をアンインストールしますか？
 	The app will be moved to the Trash. Your documents and settings stay.	アプリはゴミ箱に移動されます。ドキュメントと設定はそのまま残ります。
@@ -136,7 +136,7 @@
 	Open link	リンクを開く
 	Update	更新
 	{name} icon	{name} のアイコン
-	Loading ArtCraft Launcher…	ArtCraft Launcher を読み込み中…
+	Loading AppZ…	AppZ を読み込み中…
 	Cancel update	更新をキャンセル
 	Stop waiting; the update can be started again later	待機を中止します。更新は後で再開できます
 	Download again	再ダウンロード
@@ -160,19 +160,19 @@
 	Tarball (.tar.gz)	tarball (.tar.gz)
 
 # Contextual: each app's tagline, keyed by app id
-photocraft	Image editing	画像編集
-vectorcraft	Vector illustration	ベクターイラスト
-filmcraft	Video editing, color and sound	動画編集、カラー、サウンド
-lightcraft	Photo library and raw development	フォトライブラリと RAW 現像
-pdfcraft	Reading, organizing and protecting PDFs	PDF の閲覧、整理、保護
-effectcraft	Motion graphics and visual effects	モーショングラフィックスと視覚効果
-designcraft	Page layout and publishing	ページレイアウトと出版
-wordcraft	Writing and document design	文書作成とデザイン
-deckcraft	Presentations and slide shows	プレゼンテーションとスライドショー
-gridcraft	Spreadsheets and data	表計算とデータ
-cadcraft	Computer-aided design and drafting	コンピューター支援設計と製図
-soundcraft	Recording, editing and mixing audio	オーディオの録音、編集、ミックス
-figcraft	Interface design and prototyping	インターフェースデザインとプロトタイピング
+photoz	Image editing	画像編集
+vectorz	Vector illustration	ベクターイラスト
+filmz	Video editing, color and sound	動画編集、カラー、サウンド
+lightz	Photo library and raw development	フォトライブラリと RAW 現像
+pdfz	Reading, organizing and protecting PDFs	PDF の閲覧、整理、保護
+effectz	Motion graphics and visual effects	モーショングラフィックスと視覚効果
+designz	Page layout and publishing	ページレイアウトと出版
+wordz	Writing and document design	文書作成とデザイン
+deckz	Presentations and slide shows	プレゼンテーションとスライドショー
+gridz	Spreadsheets and data	表計算とデータ
+cadz	Computer-aided design and drafting	コンピューター支援設計と製図
+soundz	Recording, editing and mixing audio	オーディオの録音、編集、ミックス
+figz	Interface design and prototyping	インターフェースデザインとプロトタイピング
 
 # Contextual: month abbreviations for date rendering
 month	Jan	1月
@@ -193,8 +193,8 @@ month	Dec	12月
 	Installing for {platform}	{platform} にインストール
 	Downloads for {platform}	{platform} 用のダウンロード
 	No downloads for this system	このシステム用のダウンロードはありません
-	Join the ArtCraft community on Discord	Discord で ArtCraft コミュニティに参加
-	ArtCraft on {name}	{name} の ArtCraft
+	Get help on GitHub	Get help on GitHub
+	{name}	{name}
 	Couldn't open {name}: {e}	{name} を開けませんでした: {e}
 	Download cancelled	ダウンロードをキャンセルしました
 	Available to install	インストール可能
@@ -214,7 +214,7 @@ month	Dec	12月
 	Version {version} installed	バージョン {version} インストール済み
 	Version {latest}	バージョン {latest}
 	No release published yet	まだリリースがありません
-	ArtCraft Launcher	ArtCraft Launcher
+	AppZ	AppZ
 	App	アプリ
 	Latest	最新
 	Released	公開日
@@ -236,7 +236,7 @@ month	Dec	12月
 	Couldn't check for updates: {f}	更新を確認できませんでした: {f}
 	Website (coming soon)	ウェブサイト（近日公開）
 	GitHub repository	GitHub リポジトリ
-	ArtCraft	ArtCraft
+	Upstream	Upstream
 	Update 1 app	1 個のアプリを更新
 	Update all ({count})	すべて更新（{count}）
 	⊞  Grid	⊞  グリッド
@@ -249,7 +249,7 @@ month	Dec	12月
 	Full changelog	完全な変更履歴
 	link	リンク
 	No apps match	一致するアプリがありません
-	Open ArtCraft Launcher to update.	更新するには ArtCraft Launcher を開いてください。
+	Open AppZ to update.	更新するには AppZ を開いてください。
 	{name} {v} is available	{name} {v} が利用可能です
 	{count} updates are available	{count} 件の更新があります
 	These notes weren't fetched (GitHub's request limit was reached). They're on the release page.	このリリースノートは取得できませんでした（GitHub のリクエスト上限に達しました）。リリースページにあります。
@@ -313,7 +313,7 @@ filter	Installed	インストール済み
 @id	launcher.notes	新着情報
 @id	launcher.dismiss	閉じる
 @id	settings.open	設定
-@id	settings.quit	ArtCraft Launcher を終了
+@id	settings.quit	AppZ を終了
 @id	view.grid	グリッド
 @id	view.table	テーブル
 @id	filter.all	すべて
@@ -327,7 +327,7 @@ filter	Installed	インストール済み
 @id	sort.installed	インストール済みバージョン
 @id	sort.latest	最新バージョン
 @id	sort.released	最新リリース
-@id	help.discord	Discord
+@id	help.discord	help.discord
 @id	help.github	GitHub
 @id	help.website	ウェブサイト
 @id	update.check	更新を確認
@@ -337,13 +337,13 @@ filter	Installed	インストール済み
 @id	linux.preferred_kind	新しいアプリのインストール形式
 @id	tray.close_to_tray	ウィンドウを閉じてもトレイで実行し続ける
 @id	tray.show_on_current_desktop	現在のデスクトップにウィンドウを表示
-@id	tray.login_item	ログイン時に ArtCraft Launcher を起動
+@id	tray.login_item	ログイン時に AppZ を起動
 @id	appearance.theme	外観
 
 # Tray (menu bar) menu and tooltip
-	Show ArtCraft Launcher	ArtCraft Launcher を表示
+	Show AppZ	AppZ を表示
 	Check for Updates	更新を確認
-	Visit getartcraft.com	getartcraft.com を開く
-	ArtCraft on GitHub	GitHub の ArtCraft
-	Join the ArtCraft Discord	ArtCraft Discord に参加
-@plural	ArtCraft Launcher · {n} update available|ArtCraft Launcher · {n} updates available	ArtCraft Launcher · {n} 件の更新があります
+	Visit the project page	Visit the project page
+	Source code on GitHub	Source code on GitHub
+	Get help on GitHub	Get help on GitHub
+@plural	AppZ · {n} update available|AppZ · {n} updates available	AppZ · {n} 件の更新があります

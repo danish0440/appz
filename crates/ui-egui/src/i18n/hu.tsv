@@ -1,4 +1,4 @@
-# Hungarian (hu) catalog for ArtCraft Launcher.
+# Hungarian (hu) catalog for AppZ.
 # Format: context<TAB>source<TAB>translation
 # Empty context = plain UI string (tl!, t).
 # @id = command-id keyed (tr_id).
@@ -6,21 +6,21 @@
 # @msg = status/error message template (message, msg).
 # Other context = disambiguation for tr_ctx.
 #
-# Clean-room: written from the meaning of ArtCraft Launcher's English labels in neutral Hungarian,
+# Clean-room: written from the meaning of AppZ's English labels in neutral Hungarian,
 # using the terms Hungarian-speaking users of creative software know. The user is addressed with
 # the informal "te", as in most current creative and community software.
 #
 # Coverage: the whole interface — every menu string and tl! literal (complete_menus = true).
-# Left in English on purpose: product name "ArtCraft Launcher" (and its "Launcher" tag), suite
-# name "Craft App Suite",
-# app names (PhotoCraft, LightCraft, FilmCraft, DesignCraft, VectorCraft, PdfCraft, EffectCraft,
-# WordCraft, DeckCraft, GridCraft, CADCraft, SoundCraft, FigCraft), "GitHub", "Discord".
+# Left in English on purpose: product name "AppZ" (and its "Launcher" tag), suite
+# name "Z App Suite",
+# app names (PhotoZ, LightZ, FilmZ, DesignZ, VectorZ, PdfZ, EffectZ,
+# WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub", "Discord".
 # Shortcut keys keep their key-cap names (Shift, Alt, Ctrl, Cmd, Esc).
 # Trailing "…" (U+2026) must be preserved. Placeholders {name}, {n}, {version}, {count}, {v},
 # {what}, {unit}, {real}, {e} must appear in translation.
 
 	Launcher	Launcher
-	Craft App Suite	Craft App Suite
+	Z App Suite	Z App Suite
 	Open Source Tools for Creatives, Makers, and Builders	Nyílt forráskódú eszközök alkotóknak, barkácsolóknak és fejlesztőknek
 	Settings	Beállítások
 	Check for updates	Frissítések keresése
@@ -73,7 +73,7 @@
 	Reinstall	Újratelepítés
 	Uninstall…	Eltávolítás…
 	All releases	Minden kiadás
-	ArtCraft Launcher {version} is available.	Elérhető az ArtCraft Launcher új verziója: {version}.
+	AppZ {version} is available.	Elérhető az AppZ új verziója: {version}.
 	Dismiss	Elrejtés
 	Update and restart	Frissítés és újraindítás
 	A new version is available. Would you like to relaunch with the updated version?	Új verzió érhető el. Újraindítod az alkalmazást a frissítéshez?
@@ -83,7 +83,7 @@
 	Released {date}	Megjelent: {date}
 	Open on GitHub	Megnyitás a GitHubon
 	Close	Bezárás
-	ArtCraft Launcher {version}	ArtCraft Launcher {version}
+	AppZ {version}	AppZ {version}
 	Only when I ask	Csak kézi kereséskor
 	Automatically download and install updates	Frissítések automatikus letöltése és telepítése
 	Notify me when an installed app has an update	Értesítés a telepített alkalmazásokhoz elérhető frissítésekről
@@ -95,11 +95,11 @@
 	Running in the background	Futtatás a háttérben
 	Keep running in the tray when the window is closed	Az ablak bezárásakor kerüljön a tálcára
 	Show the window on the current desktop	Ablak megjelenítése az aktuális asztalon
-	Start ArtCraft Launcher when I log in	ArtCraft Launcher indítása bejelentkezéskor
+	Start AppZ when I log in	AppZ indítása bejelentkezéskor
 	Community	Közösség
-	Questions, ideas and news from the ArtCraft team	Kérdések, ötletek és hírek az ArtCraft csapatától
+	Questions, ideas and news	Questions, ideas and news
 	Appearance	Megjelenés
-	Quit ArtCraft Launcher	Kilépés az ArtCraft Launcherből
+	Quit AppZ	Kilépés az AppZből
 	Done	Kész
 	Uninstall {name}?	{name} eltávolítása?
 	The app will be moved to the Trash. Your documents and settings stay.	Az alkalmazás a Kukába kerül. A dokumentumaid és beállításaid megmaradnak.
@@ -134,7 +134,7 @@
 	Open link	Hivatkozás megnyitása
 	Update	Frissítés
 	{name} icon	{name} ikonja
-	Loading ArtCraft Launcher…	ArtCraft Launcher betöltése…
+	Loading AppZ…	AppZ betöltése…
 	Cancel update	Frissítés megszakítása
 	Stop waiting; the update can be started again later	Megszakítja a várakozást. A frissítést később újra elindíthatod.
 	Download again	Újbóli letöltés
@@ -158,19 +158,19 @@
 	Tarball (.tar.gz)	Tömörített archívum (.tar.gz)
 
 # Contextual: each app's tagline, keyed by app id
-photocraft	Image editing	Képszerkesztés
-vectorcraft	Vector illustration	Vektoros illusztráció
-filmcraft	Video editing, color and sound	Videószerkesztés, színkorrekció és hang
-lightcraft	Photo library and raw development	Fotók rendszerezése és RAW-előhívás
-pdfcraft	Reading, organizing and protecting PDFs	PDF-ek olvasása, rendezése és védelme
-effectcraft	Motion graphics and visual effects	Mozgógrafika és vizuális effektek
-designcraft	Page layout and publishing	Oldaltervezés és kiadványszerkesztés
-wordcraft	Writing and document design	Írás és dokumentumtervezés
-deckcraft	Presentations and slide shows	Prezentációk és diavetítések
-gridcraft	Spreadsheets and data	Táblázatok és adatok
-cadcraft	Computer-aided design and drafting	Számítógépes tervezés és műszaki rajz
-soundcraft	Recording, editing and mixing audio	Hangrögzítés, hangszerkesztés és keverés
-figcraft	Interface design and prototyping	Felülettervezés és prototípus-készítés
+photoz	Image editing	Képszerkesztés
+vectorz	Vector illustration	Vektoros illusztráció
+filmz	Video editing, color and sound	Videószerkesztés, színkorrekció és hang
+lightz	Photo library and raw development	Fotók rendszerezése és RAW-előhívás
+pdfz	Reading, organizing and protecting PDFs	PDF-ek olvasása, rendezése és védelme
+effectz	Motion graphics and visual effects	Mozgógrafika és vizuális effektek
+designz	Page layout and publishing	Oldaltervezés és kiadványszerkesztés
+wordz	Writing and document design	Írás és dokumentumtervezés
+deckz	Presentations and slide shows	Prezentációk és diavetítések
+gridz	Spreadsheets and data	Táblázatok és adatok
+cadz	Computer-aided design and drafting	Számítógépes tervezés és műszaki rajz
+soundz	Recording, editing and mixing audio	Hangrögzítés, hangszerkesztés és keverés
+figz	Interface design and prototyping	Felülettervezés és prototípus-készítés
 
 # Contextual: month abbreviations for date rendering
 month	Jan	jan.
@@ -191,8 +191,8 @@ month	Dec	dec.
 	Installing for {platform}	Telepítés {platform} rendszerre
 	Downloads for {platform}	Letöltések {platform} rendszerre
 	No downloads for this system	Nincsenek letöltések ehhez a rendszerhez
-	Join the ArtCraft community on Discord	Csatlakozz az ArtCraft közösségéhez a Discordon
-	ArtCraft on {name}	ArtCraft – {name}
+	Get help on GitHub	Get help on GitHub
+	{name}	{name}
 	Couldn't open {name}: {e}	{name} nem nyitható meg: {e}
 	Download cancelled	Letöltés megszakítva
 	Available to install	Telepíthető
@@ -212,7 +212,7 @@ month	Dec	dec.
 	Version {version} installed	Telepített verzió: {version}
 	Version {latest}	Verzió: {latest}
 	No release published yet	Még nem jelent meg kiadás
-	ArtCraft Launcher	ArtCraft Launcher
+	AppZ	AppZ
 	App	Alkalmazás
 	Latest	Legújabb
 	Released	Megjelent
@@ -234,7 +234,7 @@ month	Dec	dec.
 	Couldn't check for updates: {f}	Nem sikerült frissítéseket keresni: {f}
 	Website (coming soon)	Webhely (hamarosan)
 	GitHub repository	GitHub-tároló
-	ArtCraft	ArtCraft
+	Upstream	Upstream
 	Update 1 app	1 alkalmazás frissítése
 	Update all ({count})	Összes frissítése ({count})
 	⊞  Grid	⊞  Rács
@@ -247,11 +247,11 @@ month	Dec	dec.
 	Full changelog	Teljes változásnapló
 	link	hivatkozás
 	No apps match	Nincs találat
-	Open ArtCraft Launcher to update.	Nyisd meg az ArtCraft Launchert a frissítéshez.
+	Open AppZ to update.	Nyisd meg az AppZt a frissítéshez.
 	{name} {v} is available	Elérhető: {name} {v}
 	{count} updates are available	{count} frissítés elérhető
 	These notes weren't fetched (GitHub's request limit was reached). They're on the release page.	A kiadási információkat nem sikerült betölteni, mert elértük a GitHub lekérdezési korlátját. A kiadás oldalán megtalálod őket.
-	When on, opening the launcher from the menu bar brings its window to the desktop you're on. When off, macOS switches you to the desktop the window was on.	Ha be van kapcsolva, a menüsorból megnyitott ArtCraft Launcher ablaka az aktuális asztalon jelenik meg. Ha ki van kapcsolva, a macOS arra az asztalra vált, ahol az ablak található.
+	When on, opening the launcher from the menu bar brings its window to the desktop you're on. When off, macOS switches you to the desktop the window was on.	Ha be van kapcsolva, a menüsorból megnyitott AppZ ablaka az aktuális asztalon jelenik meg. Ha ki van kapcsolva, a macOS arra az asztalra vált, ahol az ablak található.
 	Couldn't change the login item: {e}	Az automatikus indítás beállítását nem sikerült módosítani: {e}
 
 # Contextual: table column headers
@@ -311,7 +311,7 @@ filter	Installed	Telepítve
 @id	launcher.notes	Újdonságok
 @id	launcher.dismiss	Elrejtés
 @id	settings.open	Beállítások
-@id	settings.quit	Kilépés az ArtCraft Launcherből
+@id	settings.quit	Kilépés az AppZből
 @id	view.grid	Rács
 @id	view.table	Táblázat
 @id	filter.all	Összes
@@ -325,7 +325,7 @@ filter	Installed	Telepítve
 @id	sort.installed	Telepített verzió
 @id	sort.latest	Legújabb verzió
 @id	sort.released	Legújabb kiadás
-@id	help.discord	Discord
+@id	help.discord	help.discord
 @id	help.github	GitHub
 @id	help.website	Webhely
 @id	update.check	Frissítések keresése
@@ -335,13 +335,13 @@ filter	Installed	Telepítve
 @id	linux.preferred_kind	Új alkalmazások csomagformátuma
 @id	tray.close_to_tray	Az ablak bezárásakor kerüljön a tálcára
 @id	tray.show_on_current_desktop	Ablak megjelenítése az aktuális asztalon
-@id	tray.login_item	ArtCraft Launcher indítása bejelentkezéskor
+@id	tray.login_item	AppZ indítása bejelentkezéskor
 @id	appearance.theme	Megjelenés
 
 # Tray (menu bar) menu and tooltip
-	Show ArtCraft Launcher	ArtCraft Launcher megjelenítése
+	Show AppZ	AppZ megjelenítése
 	Check for Updates	Frissítések keresése
-	Visit getartcraft.com	getartcraft.com megnyitása
-	ArtCraft on GitHub	ArtCraft a GitHubon
-	Join the ArtCraft Discord	Csatlakozás az ArtCraft Discord-közösségéhez
-@plural	ArtCraft Launcher · {n} update available|ArtCraft Launcher · {n} updates available	ArtCraft Launcher · {n} frissítés elérhető|ArtCraft Launcher · {n} frissítés elérhető
+	Visit the project page	Visit the project page
+	Source code on GitHub	Source code on GitHub
+	Get help on GitHub	Get help on GitHub
+@plural	AppZ · {n} update available|AppZ · {n} updates available	AppZ · {n} frissítés elérhető|AppZ · {n} frissítés elérhető

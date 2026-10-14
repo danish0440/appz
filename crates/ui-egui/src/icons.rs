@@ -1,23 +1,23 @@
-//! Bundled images: each Craft App's icon and the launcher's own.
+//! Bundled images: each Z App's icon and the launcher's own.
 
 use egui::ImageSource;
 
-/// The 128 px icon of a Craft App.
+/// The 128 px icon of a Z App.
 pub fn app(id: &str) -> Option<ImageSource<'static>> {
     Some(match id {
-        "photocraft" => egui::include_image!("../../../assets/app-icons/photocraft.png"),
-        "vectorcraft" => egui::include_image!("../../../assets/app-icons/vectorcraft.png"),
-        "filmcraft" => egui::include_image!("../../../assets/app-icons/filmcraft.png"),
-        "lightcraft" => egui::include_image!("../../../assets/app-icons/lightcraft.png"),
-        "pdfcraft" => egui::include_image!("../../../assets/app-icons/pdfcraft.png"),
-        "effectcraft" => egui::include_image!("../../../assets/app-icons/effectcraft.png"),
-        "designcraft" => egui::include_image!("../../../assets/app-icons/designcraft.png"),
-        "wordcraft" => egui::include_image!("../../../assets/app-icons/wordcraft.png"),
-        "deckcraft" => egui::include_image!("../../../assets/app-icons/deckcraft.png"),
-        "gridcraft" => egui::include_image!("../../../assets/app-icons/gridcraft.png"),
-        "cadcraft" => egui::include_image!("../../../assets/app-icons/cadcraft.png"),
-        "soundcraft" => egui::include_image!("../../../assets/app-icons/soundcraft.png"),
-        "figcraft" => egui::include_image!("../../../assets/app-icons/figcraft.png"),
+        "photoz" => egui::include_image!("../../../assets/app-icons/photoz.png"),
+        "vectorz" => egui::include_image!("../../../assets/app-icons/vectorz.png"),
+        "filmz" => egui::include_image!("../../../assets/app-icons/filmz.png"),
+        "lightz" => egui::include_image!("../../../assets/app-icons/lightz.png"),
+        "pdfz" => egui::include_image!("../../../assets/app-icons/pdfz.png"),
+        "effectz" => egui::include_image!("../../../assets/app-icons/effectz.png"),
+        "designz" => egui::include_image!("../../../assets/app-icons/designz.png"),
+        "wordz" => egui::include_image!("../../../assets/app-icons/wordz.png"),
+        "deckz" => egui::include_image!("../../../assets/app-icons/deckz.png"),
+        "gridz" => egui::include_image!("../../../assets/app-icons/gridz.png"),
+        "cadz" => egui::include_image!("../../../assets/app-icons/cadz.png"),
+        "soundz" => egui::include_image!("../../../assets/app-icons/soundz.png"),
+        "figz" => egui::include_image!("../../../assets/app-icons/figz.png"),
         _ => return None,
     })
 }
@@ -26,9 +26,9 @@ pub fn app(id: &str) -> Option<ImageSource<'static>> {
 /// An ArtCraft trademark, not covered by the MIT/Apache license (`docs/brand/LICENSE-brand.txt`).
 pub fn artcraft_logo(dark_background: bool) -> ImageSource<'static> {
     if dark_background {
-        egui::include_image!("../../../docs/brand/artcraft-logo-white.svg")
+        egui::include_image!("../../../assets/z-brand/logo-white.svg")
     } else {
-        egui::include_image!("../../../docs/brand/artcraft-logo.svg")
+        egui::include_image!("../../../assets/z-brand/logo.svg")
     }
 }
 
@@ -49,5 +49,5 @@ pub fn social(service: &str) -> Option<ImageSource<'static>> {
 
 /// The ArtCraft "A" mark in blue, as supplied: the launcher's app icon and getartcraft.com's favicon.
 pub fn artcraft_mark() -> ImageSource<'static> {
-    egui::include_image!("../../../docs/brand/artcraft-mark.svg")
+    egui::include_image!("../../../assets/z-brand/mark.svg")
 }

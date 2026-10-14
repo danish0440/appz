@@ -294,7 +294,7 @@ fn grid_shows_every_status_and_installs_on_click() {
     h.get_by_label_contains("0.4.1 installed → 0.5.0 released");
     // The window has no title bar of its own here (the web build, and the tests).
     assert!(h.query_by_label("Close").is_none());
-    assert!(h.query_all_by_label_contains("Discord").count() >= 2); // header link and footer link
+    assert!(h.query_all_by_label_contains("Help").count() >= 2); // header link and footer link
     assert!(h.query_all_by_label("Coming soon").count() >= 1);
     h.get_by_label_contains("48 MB of 131 MB");
     h.get_by_label("Update all (2)").click();
@@ -592,7 +592,7 @@ fn settings_link_to_discord() {
     snapshot(&mut h, "settings-dark");
     h.get_by_label("Questions, ideas and news");
     // The header button and the one in Settings.
-    assert!(h.query_all_by_label_contains("Discord").count() >= 2);
+    assert!(h.query_all_by_label_contains("Help").count() >= 2);
 }
 
 #[test]

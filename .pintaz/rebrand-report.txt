@@ -1,14 +1,12 @@
 rebrand artcraft-launcher -> AppZ
 about credit inserted in: NOT FOUND
 launcher patches: ['crates/core/src/feed.rs', 'crates/native/src/backend.rs', 'crates/core/src/version.rs', 'crates/core/src/details.rs', 'crates/core/src/catalog.rs', 'crates/ui-egui/src/dialogs.rs']
-lines still naming ArtCraft/getartcraft/discord (non-doc): 55
+lines still naming ArtCraft/getartcraft/discord (non-doc): 52
 apps/appz/build.rs:19: .set("LegalCopyright", "Copyright (c) the ArtCraft Launcher authors. MIT OR Apache-2.0.")
 apps/appz/src/tray.rs:30: // The ArtCraft "A" mark (an ArtCraft trademark, not MIT/Apache: docs/brand/LICENSE-brand.txt).
 crates/core/src/catalog.rs:38: /// Brand colour (sRGB), for surfaces: getartcraft.com's `--app`.
-crates/core/src/catalog.rs:66: /// The app's page on getartcraft.com.
 crates/core/src/catalog.rs:209: /// ArtCraft's website.
 crates/core/src/catalog.rs:216: /// ArtCraft's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
-crates/core/src/catalog.rs:219: /// The ArtCraft community on Discord.
 crates/core/src/details.rs:67: /// Where every Z App runs (getartcraft.com lists the same for each of them).
 crates/core/src/feed.rs:26: pub const FEED_URL: &str = ""; // PINTAZ: ArtCraft release feed off (GitHub only)
 crates/core/src/feed.rs:145: /// [`GITHUB_OWNER`]: the feed can move an app within ArtCraft's account, never out of it.
@@ -44,7 +42,6 @@ crates/ui-egui/src/views.rs:80: // The ArtCraft wordmark exactly as supplied, in
 crates/ui-egui/src/views.rs:262: /// News from ArtCraft's release feed (and app renames), until the user dismisses each.
 crates/ui-egui/src/widgets.rs:1: //! Small building blocks in getartcraft.com's style: mono labels, square buttons, badges and
 crates/ui-egui/src/widgets.rs:497: /// ArtCraft's social accounts as a row of small monochrome icons (faint, brighter on hover).
-crates/ui-egui/tests/ui.rs:631: // Cards: every app links to its repo and to its own page on getartcraft.com (plus the footer's).
 crates/ui-egui/tests/ui.rs:677: // The footer's ArtCraft links and each card's own pages.
 packaging/icons.sh:2: # Regenerate every app and tray icon from the ArtCraft "A" mark in docs/brand/, rendered exactly as
 packaging/icons.sh:3: # supplied. The mark is an ArtCraft trademark, NOT MIT/Apache: docs/brand/LICENSE-brand.txt.

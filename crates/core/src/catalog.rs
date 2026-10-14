@@ -63,7 +63,7 @@ impl CraftApp {
         format!("https://github.com/{}", self.repo)
     }
 
-    /// The app's page on getartcraft.com.
+    /// The app's page on GitHub.
     pub fn website(&self) -> String {
         format!("https://github.com/danish0440/{}", self.id)
     }
@@ -216,7 +216,7 @@ pub const GITHUB_URL: &str = "https://github.com/danish0440";
 /// ArtCraft's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
 pub const SOCIAL: [(&str, &str); 0] = []; // PINTAZ: no upstream social accounts
 
-/// The ArtCraft community on Discord.
+/// The community on GitHub.
 pub const DISCORD_URL: &str = "https://github.com/danish0440/appz/issues";
 
 /// AppZ itself, described like a Z App so it can update itself with the same

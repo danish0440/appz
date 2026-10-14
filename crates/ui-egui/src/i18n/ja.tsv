@@ -14,7 +14,7 @@
 # Left in English on purpose: product name "AppZ" (and its "Launcher" tag), suite
 # name "Z App Suite",
 # app names (PhotoZ, LightZ, FilmZ, DesignZ, VectorZ, PdfZ, EffectZ,
-# WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub", "Discord".
+# WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub", "Help".
 # Shortcut keys keep their key-cap names (Shift, Alt, Ctrl, Cmd, Esc).
 # Trailing "…" (U+2026) must be preserved. Placeholders {name}, {n}, {version}, {count}, {v},
 # {what}, {unit}, {real}, {e} must appear in translation.
@@ -126,7 +126,7 @@
 	Apps you hid	非表示にしたアプリ
 	Checked {ago} · using {sources}	最終確認: {ago} · 取得元: {sources}
 	{a} and {b}	{a} と {b}
-	Join the Discord	Discord に参加
+	Get help on GitHub	Get help on GitHub
 	Learn more	詳細を見る
 	Minimize	最小化
 	Maximize	最大化
@@ -193,7 +193,7 @@ month	Dec	12月
 	Installing for {platform}	{platform} にインストール
 	Downloads for {platform}	{platform} 用のダウンロード
 	No downloads for this system	このシステム用のダウンロードはありません
-	Get help on GitHub	Get help on GitHub
+	Join the community on GitHub	Join the community on GitHub
 	{name}	{name}
 	Couldn't open {name}: {e}	{name} を開けませんでした: {e}
 	Download cancelled	ダウンロードをキャンセルしました

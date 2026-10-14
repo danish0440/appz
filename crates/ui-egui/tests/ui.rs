@@ -625,10 +625,10 @@ fn links_to_the_website_github_and_each_apps_pages() {
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(6);
     // Footer: website, GitHub and Discord.
-    for label in ["Website", "GitHub", "Discord"] {
+    for label in ["Website", "GitHub", "Help"] {
         assert!(h.query_all_by_label(label).count() >= 1, "{label}");
     }
-    // Cards: every app links to its repo and to its own page on getartcraft.com (plus the footer's).
+    // Cards: every app links to its repo and to its own page on GitHub (plus the footer's).
     let shown_cards = h.query_all_by_label("GitHub").count() - 1;
     let shown_sites = h.query_all_by_label("Website").count() - 1;
     assert!(shown_cards >= 13, "{shown_cards}");
@@ -673,7 +673,7 @@ fn all_opened(h: &mut Harness<'_, Option<LauncherUi>>, label: &str) -> Vec<Strin
 fn links_open_the_right_pages() {
     let (mut h, _) = harness(ViewMode::Grid, egui::Theme::Dark, true);
     h.run_steps(6);
-    assert_eq!(click_opens(&mut h, "Discord").as_deref(), Some("https://github.com/danish0440/appz/issues"));
+    assert_eq!(click_opens(&mut h, "Help").as_deref(), Some("https://github.com/danish0440/appz/issues"));
     // The footer's ArtCraft links and each card's own pages.
     let github = all_opened(&mut h, "GitHub");
     assert!(github.contains(&"https://github.com/danish0440".to_string()), "{github:?}");
@@ -1312,7 +1312,7 @@ fn the_rate_limit_notice_never_runs_under_the_footer_links() {
         // Everything on the footer's right: the three links, the social icons and (when there's
         // room) the platform.
         let mut right = Vec::new();
-        for label in ["Website", "GitHub", "Discord", "X", "YouTube", "TikTok", "Instagram", "LinkedIn"] {
+        for label in ["Website", "GitHub", "Help", "X", "YouTube", "TikTok", "Instagram", "LinkedIn"] {
             right.extend(h.query_all_by_label(label).map(|n| n.rect()).filter(|r| (r.center().y - notice.center().y).abs() < 12.0));
         }
         assert_eq!(right.len(), 8, "{width}: {right:?}");

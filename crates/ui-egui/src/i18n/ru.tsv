@@ -13,7 +13,7 @@
 # Left in English on purpose: product name "AppZ" (and its "Launcher" tag), suite
 # name "Z App Suite",
 # app names (PhotoZ, LightZ, FilmZ, DesignZ, VectorZ, PdfZ, EffectZ,
-# WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub", "Discord", "Website".
+# WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub", "Help", "Website".
 # Shortcut keys keep their key-cap names (Shift, Alt, Ctrl, Cmd, Esc).
 # Trailing "…" (U+2026) must be preserved. Placeholders {name}, {n}, {version}, {count}, {v},
 # {what}, {unit}, {real}, {e} must appear in translation.
@@ -122,7 +122,7 @@
 	Apps you hid	Приложения, которые вы скрыли
 	Checked {ago} · using {sources}	Проверено {ago} · через {sources}
 	{a} and {b}	{a} и {b}
-	Join the Discord	Присоединиться к Discord
+	Get help on GitHub	Get help on GitHub
 	Learn more	Подробнее
 	Minimize	Свернуть
 	Maximize	Развернуть
@@ -189,7 +189,7 @@ month	Dec	дек.
 	Installing for {platform}	Установка для {platform}
 	Downloads for {platform}	Скачивание для {platform}
 	No downloads for this system	Нет загрузок для этой системы
-	Get help on GitHub	Get help on GitHub
+	Join the community on GitHub	Join the community on GitHub
 	{name}	{name}
 	Couldn't open {name}: {e}	Не удалось открыть {name}: {e}
 	Download cancelled	Скачивание отменено

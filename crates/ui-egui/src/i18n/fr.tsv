@@ -13,7 +13,7 @@
 # Left in English on purpose: product name "AppZ" (and its "Launcher" tag), suite
 # name "Z App Suite", app names (PhotoZ, LightZ, FilmZ, DesignZ, VectorZ,
 # PdfZ, EffectZ, WordZ, DeckZ, GridZ, CadZ, SoundZ, FigZ), "GitHub",
-# "Discord".
+# "Help".
 # Trailing "…" (U+2026) must be preserved. Placeholders {name}, {n}, {version}, {count}, {v},
 # {what}, {unit}, {real}, {e} must appear in translation.
 
@@ -122,7 +122,7 @@
 	Apps you hid	Applications que vous avez masquées
 	Checked {ago} · using {sources}	Vérifié {ago} · via {sources}
 	{a} and {b}	{a} et {b}
-	Join the Discord	Rejoindre le Discord
+	Get help on GitHub	Get help on GitHub
 	Learn more	En savoir plus
 	Minimize	Réduire
 	Maximize	Agrandir
@@ -189,7 +189,7 @@ month	Dec	déc.
 	Installing for {platform}	Installation pour {platform}
 	Downloads for {platform}	Téléchargements pour {platform}
 	No downloads for this system	Aucun téléchargement pour ce système
-	Get help on GitHub	Get help on GitHub
+	Join the community on GitHub	Join the community on GitHub
 	{name}	{name}
 	Couldn't open {name}: {e}	Impossible d'ouvrir {name} : {e}
 	Download cancelled	Téléchargement annulé

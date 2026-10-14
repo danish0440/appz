@@ -92,7 +92,7 @@ impl LauncherUi {
                     self.check_now();
                 }
                 ui.add_space(6.0);
-                if widgets::nav_link(ui, tl!("Help"), tl!("Get help on GitHub"), h, false).clicked() {
+                if widgets::nav_link(ui, tl!("Help"), tl!("Join the community on GitHub"), h, false).clicked() {
                     ui.ctx().open_url(egui::OpenUrl::new_tab(appz_core::catalog::DISCORD_URL));
                 }
                 ui.add_space(6.0);

@@ -112,7 +112,7 @@ month	Dec	12月
 	Installing for {platform}	安装平台：{platform}
 	Downloads for {platform}	下载平台：{platform}
 	No downloads for this system	此系统暂无可用下载
-	Get help on GitHub	Get help on GitHub
+	Join the community on GitHub	Join the community on GitHub
 	{name}	{name}
 	Available to install	可安装
 	Available	可用
@@ -222,7 +222,7 @@ filter	Installed	已安装
 	Update	更新
 	New	新
 	Classic	经典
-	Join the Discord	加入 Discord
+	Get help on GitHub	Get help on GitHub
 	Minimize	最小化
 	Maximize	最大化
 	Restore	还原

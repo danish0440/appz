@@ -344,7 +344,7 @@ impl LauncherUi {
         ui.add_space(6.0);
         ui.horizontal_wrapped(|ui| {
             use appz_core::catalog::{DISCORD_URL, GITHUB_URL, WEBSITE_URL};
-            if widgets::button(ui, tl!("Join the Discord"), Kind::Primary, 0.0).on_hover_text(DISCORD_URL).clicked() {
+            if widgets::button(ui, tl!("Get help on GitHub"), Kind::Primary, 0.0).on_hover_text(DISCORD_URL).clicked() {
                 ui.ctx().open_url(egui::OpenUrl::new_tab(DISCORD_URL));
             }
             if widgets::button(ui, tl!("Website"), Kind::Secondary, 0.0).on_hover_text(WEBSITE_URL).clicked() {

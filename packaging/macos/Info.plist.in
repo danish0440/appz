@@ -26,9 +26,9 @@
   <string>@SHORT_VERSION@</string>
   <key>CFBundleVersion</key>
   <string>@SHORT_VERSION@</string>
-  <key>ZLauncherVersion</key>
+  <key>AppZVersion</key>
   <string>@VERSION@</string>
-  <key>ZLauncherBuildCommit</key>
+  <key>AppZBuildCommit</key>
   <string>@BUILD_SHA@</string>
   <key>CFBundleIconFile</key>
   <string>AppZ</string>

@@ -42,8 +42,8 @@
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
     <!-- MSI caches this icon using its Id as the filename; keep the .exe extension (ICE50). -->
-    <Icon Id="ZLauncherIcon.exe" SourceFile="$(var.IconPath)" />
-    <Property Id="ARPPRODUCTICON" Value="ZLauncherIcon.exe" />
+    <Icon Id="AppZIcon.exe" SourceFile="$(var.IconPath)" />
+    <Property Id="ARPPRODUCTICON" Value="AppZIcon.exe" />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/danish0440/appz" />
     <Property Id="ARPURLUPDATEINFO" Value="https://github.com/danish0440/appz/releases" />
     <Property Id="ARPHELPLINK" Value="https://github.com/danish0440/appz/issues" />
@@ -57,7 +57,7 @@
     <StandardDirectory Id="DesktopFolder" />
 
     <!-- An update installs where the user put the previous version (recorded by
-         ZLauncherApp below; every version since 0.1.0 records it). -->
+         AppZApp below; every version since 0.1.0 records it). -->
     <Property Id="INSTALLFOLDER">
       <RegistrySearch Id="PreviousInstallFolder" Root="HKCU" Key="Software\Learning Machines LLC\AppZ" Name="InstallDir" Type="raw" />
     </Property>
@@ -78,7 +78,7 @@
         Condition="INSTALLDESKTOPSHORTCUT = &quot;1&quot;" />
 
     <Feature Id="Main" Title="AppZ" Level="1">
-      <ComponentGroupRef Id="ZLauncherFiles" />
+      <ComponentGroupRef Id="AppZFiles" />
     </Feature>
 
     <!-- The setup wizard: WixUI_InstallDir without its licence page, and with our folder page
@@ -88,7 +88,7 @@
     <UI>
       <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="ZInstallDirDlg" Order="2" Condition="NOT Installed" />
       <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="ZInstallDirDlg" Order="2" Condition="NOT Installed" />
-      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchZLauncher"
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchAppZ"
           Condition="WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed" />
 
       <Dialog Id="ZInstallDirDlg" Width="370" Height="270" Title="!(loc.InstallDirDlg_Title)">
@@ -129,47 +129,47 @@
 
     <!-- The full version (Version is numeric, so it drops a pre-release tag), shown on the wizard's
          pages through appz.en-us.wxl. -->
-    <Property Id="ZLauncherVersion" Value="$(var.DisplayVersion)" />
+    <Property Id="AppZVersion" Value="$(var.DisplayVersion)" />
 
     <!-- Finish page: say where to find the launcher, and offer to start it (ticked by default). -->
     <Property Id="WIXUI_EXITDIALOGOPTIONALTEXT" Value="AppZ $(var.DisplayVersion) is installed. Start it any time from the Start menu to install and update the Z App Suite." />
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch AppZ" />
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
-    <Property Id="WixShellExecTarget" Value="[#ZLauncherExe]" />
+    <Property Id="WixShellExecTarget" Value="[#AppZExe]" />
     <!-- Runs in the wizard's own process, so the launcher starts as the user. -->
-    <CustomAction Id="LaunchZLauncher" BinaryRef="Wix4UtilCA_$(sys.BUILDARCHSHORT)" DllEntry="WixShellExec" Impersonate="yes" Return="ignore" />
+    <CustomAction Id="LaunchAppZ" BinaryRef="Wix4UtilCA_$(sys.BUILDARCHSHORT)" DllEntry="WixShellExec" Impersonate="yes" Return="ignore" />
   </Package>
 
   <Fragment>
-    <ComponentGroup Id="ZLauncherFiles">
-      <Component Id="ZLauncherApp" Directory="INSTALLFOLDER" Guid="8D1A9885-4D37-5CA1-91C9-F60214FA961B">
-        <File Id="ZLauncherExe" Source="$(var.BinDir)\appz.exe" KeyPath="no" />
+    <ComponentGroup Id="AppZFiles">
+      <Component Id="AppZApp" Directory="INSTALLFOLDER" Guid="8D1A9885-4D37-5CA1-91C9-F60214FA961B">
+        <File Id="AppZExe" Source="$(var.BinDir)\appz.exe" KeyPath="no" />
         <!-- Read back by the next version's installer and by the launcher (self_update.rs). -->
         <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\AppZ" Name="InstallDir" Value="[INSTALLFOLDER]" Type="string" KeyPath="yes" />
         <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\AppZ" Name="DesktopShortcutChoice" Value="[DESKTOPSHORTCUTCHOICE]" Type="string" />
         <!-- Win+R "appz". -->
-        <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\appz.exe" Value="[#ZLauncherExe]" Type="string" />
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\appz.exe" Value="[#AppZExe]" Type="string" />
         <RemoveFolder Id="RemoveInstallFolder" Directory="INSTALLFOLDER" On="uninstall" />
         <RemoveFolder Id="RemoveLocalProgramsFolder" Directory="LocalProgramsFolder" On="uninstall" />
       </Component>
 
-      <Component Id="ZLauncherShortcut" Directory="ProgramMenuFolder" Guid="715B35D0-8D49-5A83-8BE1-CD0EB1C4FBF7">
+      <Component Id="AppZShortcut" Directory="ProgramMenuFolder" Guid="715B35D0-8D49-5A83-8BE1-CD0EB1C4FBF7">
         <Shortcut Id="StartMenuShortcut" Name="AppZ"
             Description="Install and update the Z App Suite"
-            Target="[#ZLauncherExe]" WorkingDirectory="INSTALLFOLDER"
-            Icon="ZLauncherIcon.exe" IconIndex="0">
+            Target="[#AppZExe]" WorkingDirectory="INSTALLFOLDER"
+            Icon="AppZIcon.exe" IconIndex="0">
           <ShortcutProperty Key="System.AppUserModel.ID" Value="com.pintaz.appz" />
         </Shortcut>
         <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\AppZ" Name="StartMenuShortcut" Value="1" Type="integer" KeyPath="yes" />
       </Component>
 
       <!-- Only when the folder page's box is ticked; removed on uninstall like everything else. -->
-      <Component Id="ZLauncherDesktopShortcut" Directory="DesktopFolder" Guid="46F7B289-F8A9-58E1-A606-8BC94A57403B"
+      <Component Id="AppZDesktopShortcut" Directory="DesktopFolder" Guid="46F7B289-F8A9-58E1-A606-8BC94A57403B"
           Condition="INSTALLDESKTOPSHORTCUT = &quot;1&quot;">
         <Shortcut Id="DesktopShortcut" Name="AppZ"
             Description="Install and update the Z App Suite"
-            Target="[#ZLauncherExe]" WorkingDirectory="INSTALLFOLDER"
-            Icon="ZLauncherIcon.exe" IconIndex="0">
+            Target="[#AppZExe]" WorkingDirectory="INSTALLFOLDER"
+            Icon="AppZIcon.exe" IconIndex="0">
           <ShortcutProperty Key="System.AppUserModel.ID" Value="com.pintaz.appz" />
         </Shortcut>
         <RegistryValue Root="HKCU" Key="Software\Learning Machines LLC\AppZ" Name="DesktopShortcut" Value="1" Type="integer" KeyPath="yes" />

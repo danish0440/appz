@@ -75,7 +75,7 @@ settings file must produce an error the user can act on, never a panic. Shared s
 
 ### Look and feel
 
-The UI matches the apps page on getartcraft.com (`artcraft-website-next` in `artcraft-services`):
+The UI matches the apps page on GitHub (`artcraft-website-next` in `artcraft-services`):
 hard square corners, 1 px hairlines instead of shadows, Archivo (620, 118 % width) for headings
 and app names, Inter for body text, upper-case Geist Mono labels and buttons, and the site's
 colour tokens by name (`theme::Tokens`). Build new UI from `widgets.rs`; never hard-code a colour.
@@ -153,7 +153,7 @@ Packaging facts the code relies on:
   `DesktopShortcutChoice`) and reused by the next version, and `self_update.rs` reads `InstallDir`
   to know the running copy came from the MSI. Its shortcuts set AppUserModelID
   `com.pintaz.appz`, which toast notifications need. `portable.txt` beside the exe switches on portable mode
-  (`ZLauncherData\` next to the exe).
+  (`AppZData\` next to the exe).
 - The macOS bundle is `AppZ.app` (executable `Contents/MacOS/AppZ`), a
   normal Dock app that can also sit in the menu bar: `LSUIElement` must never be set.
 - Linux: the tray uses StatusNotifierItem over D-Bus and notifications use

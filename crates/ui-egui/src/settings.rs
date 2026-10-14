@@ -2,7 +2,7 @@
 
 use std::collections::BTreeMap;
 
-use artcraft_launcher_core::PackageKind;
+use appz_core::PackageKind;
 use serde::{Deserialize, Serialize};
 
 use crate::i18n::t;
@@ -112,7 +112,7 @@ pub struct Settings {
     pub notified: BTreeMap<String, String>,
     /// Unix seconds of the last finished check.
     pub last_check: Option<i64>,
-    /// Catalog ids of apps hidden from the main lists (`photocraft`, …).
+    /// Catalog ids of apps hidden from the main lists (`photoz`, …).
     pub hidden: std::collections::BTreeSet<String>,
 }
 

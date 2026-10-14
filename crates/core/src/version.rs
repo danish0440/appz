@@ -11,6 +11,10 @@ pub use semver::Version;
 pub fn parse(text: &str) -> Option<Version> {
     let t = text.trim();
     let t = t.strip_prefix(['v', 'V']).unwrap_or(t);
+    // PINTAZ: v1.2.3-z1 is our build mark on upstream 1.2.3, not a pre-release.
+    let z = t.rfind("-z").filter(|&i| i + 2 < t.len() && t[i + 2..].bytes().all(|b| b.is_ascii_digit()));
+    let zfree = z.map(|i| format!("{}+{}", &t[..i], &t[i + 1..]));
+    let t = zfree.as_deref().unwrap_or(t);
     if t.is_empty() || t.len() > 64 {
         return None;
     }
@@ -57,7 +61,7 @@ pub fn parse_package(text: &str) -> Option<Version> {
     match parts.as_slice() {
         [a, b, c] => Version::parse(&format!("{a}.{b}.{c}")).ok(),
         [a, b] => Version::parse(&format!("{a}.{b}.0")).ok(),
-        // Text around the version, as in `--version` output (`PhotoCraft 0.5.0 (abc, 2026)`):
+        // Text around the version, as in `--version` output (`PhotoZ 0.5.0 (abc, 2026)`):
         // the first `X.Y.Z` run anywhere.
         _ => first_xyz(&t),
     }
@@ -160,7 +164,7 @@ mod tests {
         assert_eq!(p("0.4.0").as_deref(), Some("0.4.0"));
         assert_eq!(p("0.5").as_deref(), Some("0.5.0"));
         // A version inside text, as `--version` prints it.
-        assert_eq!(p("PhotoCraft 0.5.0 (abc, 2026)").as_deref(), Some("0.5.0"));
+        assert_eq!(p("PhotoZ 0.5.0 (abc, 2026)").as_deref(), Some("0.5.0"));
         assert_eq!(p("junk"), None);
         assert_eq!(p("garbage"), None);
         // The bug this guards: 0.5.0-1 used to read as a pre-release, so an installed .deb of the

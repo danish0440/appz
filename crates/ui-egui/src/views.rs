@@ -1,11 +1,11 @@
 //! The header, toolbar, footer, the grid of cards and the table, laid out like the apps page on
 //! getartcraft.com: hairline cells, mono labels and square controls.
 
-use artcraft_launcher_core::details::AppDetails;
-use artcraft_launcher_core::platform::pick_asset;
-use artcraft_launcher_core::protocol::{Command, JobPhase};
-use artcraft_launcher_core::status::AppStatus;
-use artcraft_launcher_core::{AppGroup, SUITE, time};
+use appz_core::details::AppDetails;
+use appz_core::platform::pick_asset;
+use appz_core::protocol::{Command, JobPhase};
+use appz_core::status::AppStatus;
+use appz_core::{AppGroup, SUITE, time};
 use egui::{Color32, CornerRadius, FontId, Rect, RichText, Sense, Stroke, Ui, vec2};
 
 use crate::app::{Dialog, LauncherUi, TitleBar};
@@ -80,7 +80,7 @@ impl LauncherUi {
             // The ArtCraft wordmark exactly as supplied, in its own cell.
             let logo = vec2(14.0 * crate::icons::ARTCRAFT_LOGO_ASPECT, 14.0);
             let (cell, _) = ui.allocate_exact_size(vec2(logo.x + 40.0, h), Sense::hover());
-            egui::Image::new(crate::icons::artcraft_logo(t.dark)).alt_text(tl!("ArtCraft")).paint_at(ui, Rect::from_center_size(cell.center(), logo));
+            egui::Image::new(crate::icons::artcraft_logo(t.dark)).alt_text(tl!("AppZ")).paint_at(ui, Rect::from_center_size(cell.center(), logo));
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if bar == TitleBar::Custom {
                     widgets::window_buttons(ui, h);
@@ -92,8 +92,8 @@ impl LauncherUi {
                     self.check_now();
                 }
                 ui.add_space(6.0);
-                if widgets::nav_link(ui, tl!("Discord"), tl!("Join the ArtCraft community on Discord"), h, false).clicked() {
-                    ui.ctx().open_url(egui::OpenUrl::new_tab(artcraft_launcher_core::catalog::DISCORD_URL));
+                if widgets::nav_link(ui, tl!("Help"), tl!("Get help on GitHub"), h, false).clicked() {
+                    ui.ctx().open_url(egui::OpenUrl::new_tab(appz_core::catalog::DISCORD_URL));
                 }
                 ui.add_space(6.0);
                 widgets::rule(ui, h);
@@ -117,9 +117,9 @@ impl LauncherUi {
                         ui.add_space(16.0);
                         widgets::tag(ui, tl!("Launcher"), t.invert_bg, t.invert_fg);
                     }
-                    if ui.available_width() >= 12.0 + widgets::hud_galley(ui, tl!("Craft App Suite"), t.muted).size().x {
+                    if ui.available_width() >= 12.0 + widgets::hud_galley(ui, tl!("Z App Suite"), t.muted).size().x {
                         ui.add_space(12.0);
-                        widgets::hud(ui, tl!("Craft App Suite"), t.muted);
+                        widgets::hud(ui, tl!("Z App Suite"), t.muted);
                     }
                 });
             });
@@ -143,7 +143,7 @@ impl LauncherUi {
                         widgets::tag(ui, tl!("Update"), t.accent, Color32::WHITE);
                         ui.add_space(4.0);
                         ui.label(
-                            RichText::new(fmt(tl!("ArtCraft Launcher {version} is available."), &[("version", &r.version_label())]))
+                            RichText::new(fmt(tl!("AppZ {version} is available."), &[("version", &r.version_label())]))
                                 .family(theme::medium())
                                 .color(t.ink_strong),
                         );
@@ -168,7 +168,7 @@ impl LauncherUi {
                                         .on_hover_text(tl!("Stop waiting; the update can be started again later"))
                                         .clicked()
                                 {
-                                    self.send(Command::Cancel { app: artcraft_launcher_core::catalog::LAUNCHER_ID.to_string() });
+                                    self.send(Command::Cancel { app: appz_core::catalog::LAUNCHER_ID.to_string() });
                                 }
                                 widgets::progress(ui, fraction, &caption, t.accent, 220.0);
                                 return;
@@ -262,7 +262,7 @@ impl LauncherUi {
     /// News from ArtCraft's release feed (and app renames), until the user dismisses each.
     fn announcements(&mut self, ui: &mut Ui) {
         let t = Tokens::get(ui.ctx());
-        let shown: Vec<artcraft_launcher_core::feed::Notice> =
+        let shown: Vec<appz_core::feed::Notice> =
             self.announcements.iter().filter(|n| !self.settings.dismissed_notices.contains(&n.id)).take(3).cloned().collect();
         for notice in shown {
             egui::Frame::new().fill(t.sunken).stroke(t.hairline()).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
@@ -316,8 +316,8 @@ impl LauncherUi {
             Some(p) => fmt(tl!("Downloads for {platform}"), &[("platform", &p.label())]),
             None => tl!("No downloads for this system").into(),
         };
-        use artcraft_launcher_core::catalog::{DISCORD_URL, GITHUB_URL, SOCIAL, WEBSITE_URL};
-        let links = [(tl!("Discord"), DISCORD_URL), (tl!("GitHub"), GITHUB_URL), (tl!("Website"), WEBSITE_URL)];
+        use appz_core::catalog::{DISCORD_URL, GITHUB_URL, SOCIAL, WEBSITE_URL};
+        let links = [(tl!("Help"), DISCORD_URL), (tl!("GitHub"), GITHUB_URL), (tl!("Website"), WEBSITE_URL)];
         let (icon, link_gap) = (13.0, 16.0);
         // The links and icons on the right keep their size; the status on the left gets what is
         // left and is cut short with "…", never drawn under them. A narrow window drops the
@@ -926,13 +926,13 @@ pub(crate) fn version_line(e: &AppEntry, status: &AppStatus) -> String {
 }
 
 /// The launcher's own download for this platform.
-pub(crate) fn launcher_download(r: &artcraft_launcher_core::Release, p: artcraft_launcher_core::Platform) -> Option<String> {
-    use artcraft_launcher_core::PackageKind;
+pub(crate) fn launcher_download(r: &appz_core::Release, p: appz_core::Platform) -> Option<String> {
+    use appz_core::PackageKind;
     let kinds: &[PackageKind] = match p.os {
-        artcraft_launcher_core::Os::Linux => &[PackageKind::AppImage, PackageKind::Deb],
+        appz_core::Os::Linux => &[PackageKind::AppImage, PackageKind::Deb],
         _ => p.default_kinds(),
     };
-    pick_asset(r, &[artcraft_launcher_core::catalog::LAUNCHER_ID], p, kinds).map(|(a, _)| a.url.clone())
+    pick_asset(r, &[appz_core::catalog::LAUNCHER_ID], p, kinds).map(|(a, _)| a.url.clone())
 }
 
 /// A column of single-line texts, one per font and `gap` apart, centred across the row it is in.

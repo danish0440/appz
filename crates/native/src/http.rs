@@ -4,12 +4,12 @@ use std::io::{Read, Write};
 use std::path::Path;
 use std::sync::atomic::{AtomicU8, Ordering};
 
-use artcraft_launcher_core::protocol::{CANCELLED, PAUSED};
+use appz_core::protocol::{CANCELLED, PAUSED};
 use std::time::Duration;
 
 use sha2::{Digest, Sha256};
 
-const USER_AGENT: &str = concat!("ArtCraftLauncher/", env!("CARGO_PKG_VERSION"));
+const USER_AGENT: &str = concat!("ZLauncher/", env!("CARGO_PKG_VERSION"));
 /// Largest JSON or text answer we read.
 const MAX_SMALL: u64 = 4 << 20;
 
@@ -97,7 +97,7 @@ impl Http {
             .new_agent();
         // An optional token raises GitHub's limit from 60 to 5000 requests an hour. Only ever sent
         // to api.github.com.
-        let token = std::env::var("ARTCRAFT_LAUNCHER_GITHUB_TOKEN").ok().map(|t| t.trim().to_string()).filter(|t| !t.is_empty());
+        let token = std::env::var("APPZ_GITHUB_TOKEN").ok().map(|t| t.trim().to_string()).filter(|t| !t.is_empty());
         Ok(Self { small, feed, no_redirect, download, token })
     }
 
@@ -541,9 +541,9 @@ pub(crate) mod tests {
             std::fs::File::options().write(true).open(&p).unwrap().set_modified(old).unwrap();
             p
         };
-        let keep = make("photocraft-0.5.0-macos-universal.dmg.150000.part");
-        let legacy = make("photocraft-0.5.0-macos-universal.part");
-        let finished = make("photocraft-0.5.0-macos-universal.dmg");
+        let keep = make("photoz-0.5.0-macos-universal.dmg.150000.part");
+        let legacy = make("photoz-0.5.0-macos-universal.part");
+        let finished = make("photoz-0.5.0-macos-universal.dmg");
         let fresh = dir.path().join("x.part");
         std::fs::write(&fresh, b"x").unwrap();
         clean_downloads(dir.path(), DAYS_30, DAYS_7);
@@ -815,17 +815,17 @@ pub(crate) mod tests {
         assert!(!part_path(&dest, body.len() as u64).exists());
     }
 
-    /// Live: a real Craft App release asset (`cargo test -p artcraft-launcher-native -- --ignored`).
+    /// Live: a real Z App release asset (`cargo test -p appz-native -- --ignored`).
     #[test]
     #[ignore = "needs network access"]
     fn downloads_a_real_release_asset() {
         let http = Http::new().unwrap();
-        let Fetched::Body { text, .. } = http.get_api("https://api.github.com/repos/storytold/wordcraft/releases/latest", None).unwrap() else {
+        let Fetched::Body { text, .. } = http.get_api("https://api.github.com/repos/danish0440/wordz/releases/latest", None).unwrap() else {
             panic!("no release")
         };
-        let release = artcraft_launcher_core::release::parse_github_release(&text, "storytold/wordcraft").unwrap();
+        let release = appz_core::release::parse_github_release(&text, "danish0440/wordz").unwrap();
         let sums_url = &release.sums_asset().unwrap().url;
-        let sums = artcraft_launcher_core::release::parse_sha256sums(&http.get_text(sums_url).unwrap().unwrap());
+        let sums = appz_core::release::parse_sha256sums(&http.get_text(sums_url).unwrap().unwrap());
         let asset = release.assets.iter().find(|a| a.name.ends_with("freebsd-x86_64.tar.gz")).unwrap();
         let sha = asset.sha256.clone().or_else(|| sums.iter().find(|(_, n)| *n == asset.name).map(|(h, _)| h.clone())).unwrap();
         let dir = tempfile::tempdir().unwrap();
@@ -837,7 +837,7 @@ pub(crate) mod tests {
     /// Answers one request with `head` (status line and headers) and an empty body.
     fn answer_once(head: String) -> String {
         let listener = TcpListener::bind("127.0.0.1:0").unwrap();
-        let url = format!("http://{}/repos/storytold/photocraft/releases/latest", listener.local_addr().unwrap());
+        let url = format!("http://{}/repos/danish0440/photoz/releases/latest", listener.local_addr().unwrap());
         std::thread::spawn(move || {
             let Ok((mut stream, _)) = listener.accept() else { return };
             let mut reader = BufReader::new(stream.try_clone().unwrap());
@@ -891,6 +891,6 @@ pub(crate) mod tests {
 
     #[test]
     fn partial_files_are_named_after_the_file_and_size() {
-        assert_eq!(part_path(Path::new("/d/photocraft.dmg"), 9), Path::new("/d/photocraft.dmg.9.part"));
+        assert_eq!(part_path(Path::new("/d/photoz.dmg"), 9), Path::new("/d/photoz.dmg.9.part"));
     }
 }

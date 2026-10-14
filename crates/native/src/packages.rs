@@ -1,15 +1,15 @@
-//! Reading system package lists (dpkg, rpm, pacman, Flatpak) and matching them to Craft Apps.
+//! Reading system package lists (dpkg, rpm, pacman, Flatpak) and matching them to Z Apps.
 //!
 //! Pure functions over the tools' text output, so they're tested on every platform; only Linux
 //! runs the tools (`detect::linux`).
 
-use artcraft_launcher_core::{CraftApp, InstallSource, version};
+use appz_core::{CraftApp, InstallSource, version};
 
-/// One installed package that belongs to a Craft App.
+/// One installed package that belongs to a Z App.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Package {
     pub manager: InstallSource,
-    /// The package's name (`photocraft-bin`) or Flatpak app id.
+    /// The package's name (`photoz-bin`) or Flatpak app id.
     pub name: String,
     /// As the package manager reports it (`0.5.0-1`); empty when it doesn't say.
     pub version: String,
@@ -63,10 +63,10 @@ pub fn parse_flatpak_info(text: &str) -> Option<String> {
     text.lines().find_map(|l| l.trim().strip_prefix("Version:").map(|v| v.trim().to_string())).filter(|v| !v.is_empty())
 }
 
-/// The package names a Craft App may be installed under with `manager`. On Arch the AUR carries
-/// each app three ways: built from source (`photocraft`), the release binary (`photocraft-bin`)
-/// and the latest commit (`photocraft-git`). Debian and RPM packages may use either the short stem
-/// (`photocraft`) or the reverse-DNS bundle id (`ai.storyteller.photocraft`).
+/// The package names a Z App may be installed under with `manager`. On Arch the AUR carries
+/// each app three ways: built from source (`photoz`), the release binary (`photoz-bin`)
+/// and the latest commit (`photoz-git`). Debian and RPM packages may use either the short stem
+/// (`photoz`) or the reverse-DNS bundle id (`com.pintaz.photoz`).
 pub fn candidate_names(app: &CraftApp, manager: InstallSource) -> Vec<String> {
     match manager {
         InstallSource::Flatpak => vec![app.bundle_id()],
@@ -102,56 +102,56 @@ mod tests {
     #[test]
     fn reads_each_package_managers_listing() {
         assert_eq!(
-            parse_dpkg("photocraft|installed|0.5.0-1\nphotocraft:amd64|installed|0.6.0-1\nwordcraft|config-files|0.3.0-1\n"),
-            [("photocraft".into(), "0.5.0-1".into()), ("photocraft".into(), "0.6.0-1".into())]
+            parse_dpkg("photoz|installed|0.5.0-1\nphotoz:amd64|installed|0.6.0-1\nwordz|config-files|0.3.0-1\n"),
+            [("photoz".into(), "0.5.0-1".into()), ("photoz".into(), "0.6.0-1".into())]
         );
-        assert_eq!(parse_rpm("gridcraft|0.3.0\n"), [("gridcraft".into(), "0.3.0".into())]);
-        assert_eq!(parse_pacman("photocraft-bin 0.5.0-1\nlinux 6.11.1.arch1-1\n").len(), 2);
+        assert_eq!(parse_rpm("gridz|0.3.0\n"), [("gridz".into(), "0.3.0".into())]);
+        assert_eq!(parse_pacman("photoz-bin 0.5.0-1\nlinux 6.11.1.arch1-1\n").len(), 2);
         assert_eq!(
-            parse_flatpak_list("ai.storyteller.wordcraft\t\nai.storyteller.cadcraft\t0.3.0\n"),
-            [("ai.storyteller.wordcraft".into(), String::new()), ("ai.storyteller.cadcraft".into(), "0.3.0".into())]
+            parse_flatpak_list("com.pintaz.wordz\t\ncom.pintaz.cadz\t0.3.0\n"),
+            [("com.pintaz.wordz".into(), String::new()), ("com.pintaz.cadz".into(), "0.3.0".into())]
         );
-        let info = "\nWordCraft - Word processor\n\n          ID: ai.storyteller.wordcraft\n     Version: 0.3.0\n      Branch: master\n";
+        let info = "\nWordZ - Word processor\n\n          ID: com.pintaz.wordz\n     Version: 0.3.0\n      Branch: master\n";
         assert_eq!(parse_flatpak_info(info).as_deref(), Some("0.3.0"));
         assert_eq!(parse_flatpak_info("Version: \n"), None);
     }
 
     #[test]
     fn candidate_names_cover_bundle_ids_for_deb_rpm_and_pacman() {
-        let photo = CraftApp::by_id("photocraft").unwrap();
+        let photo = CraftApp::by_id("photoz").unwrap();
         let deb_names = candidate_names(photo, InstallSource::Deb);
-        assert!(deb_names.contains(&"photocraft".to_string()));
-        assert!(deb_names.contains(&"ai.storyteller.photocraft".to_string()));
+        assert!(deb_names.contains(&"photoz".to_string()));
+        assert!(deb_names.contains(&"com.pintaz.photoz".to_string()));
 
         let rpm_names = candidate_names(photo, InstallSource::Rpm);
-        assert!(rpm_names.contains(&"photocraft".to_string()));
-        assert!(rpm_names.contains(&"ai.storyteller.photocraft".to_string()));
+        assert!(rpm_names.contains(&"photoz".to_string()));
+        assert!(rpm_names.contains(&"com.pintaz.photoz".to_string()));
 
         let pacman_names = candidate_names(photo, InstallSource::Pacman);
-        assert!(pacman_names.contains(&"photocraft".to_string()));
-        assert!(pacman_names.contains(&"photocraft-bin".to_string()));
-        assert!(pacman_names.contains(&"ai.storyteller.photocraft".to_string()));
+        assert!(pacman_names.contains(&"photoz".to_string()));
+        assert!(pacman_names.contains(&"photoz-bin".to_string()));
+        assert!(pacman_names.contains(&"com.pintaz.photoz".to_string()));
     }
 
     #[test]
     fn finds_aur_packages_in_every_flavour() {
-        let photo = CraftApp::by_id("photocraft").unwrap();
-        let pdf = CraftApp::by_id("pdfcraft").unwrap();
+        let photo = CraftApp::by_id("photoz").unwrap();
+        let pdf = CraftApp::by_id("pdfz").unwrap();
         let installed =
-            pkgs(InstallSource::Pacman, parse_pacman("linux 6.11.1.arch1-1\nphotocraft-git 0.3.0.r47.g47f9306-1\nprintcraft-bin 0.2.1-1\n"));
+            pkgs(InstallSource::Pacman, parse_pacman("linux 6.11.1.arch1-1\nphotoz-git 0.3.0.r47.g47f9306-1\nprintcraft-bin 0.2.1-1\n"));
         let hit = find(photo, &installed, &[InstallSource::Pacman]).unwrap();
-        assert_eq!(hit.name, "photocraft-git");
+        assert_eq!(hit.name, "photoz-git");
         assert_eq!(version_of(hit).unwrap().to_string(), "0.3.0");
-        // PdfCraft under its old name.
+        // PdfZ under its old name.
         assert_eq!(find(pdf, &installed, &[InstallSource::Pacman]).unwrap().name, "printcraft-bin");
-        assert!(find(CraftApp::by_id("wordcraft").unwrap(), &installed, &[InstallSource::Pacman]).is_none());
+        assert!(find(CraftApp::by_id("wordz").unwrap(), &installed, &[InstallSource::Pacman]).is_none());
     }
 
     #[test]
     fn prefers_managers_in_order_and_reads_revisions() {
-        let photo = CraftApp::by_id("photocraft").unwrap();
-        let mut installed = pkgs(InstallSource::Deb, parse_dpkg("photocraft|installed|0.5.0-1\n"));
-        installed.extend(pkgs(InstallSource::Flatpak, parse_flatpak_list("ai.storyteller.photocraft\t0.4.0\n")));
+        let photo = CraftApp::by_id("photoz").unwrap();
+        let mut installed = pkgs(InstallSource::Deb, parse_dpkg("photoz|installed|0.5.0-1\n"));
+        installed.extend(pkgs(InstallSource::Flatpak, parse_flatpak_list("com.pintaz.photoz\t0.4.0\n")));
         let hit = find(photo, &installed, &[InstallSource::Deb, InstallSource::Flatpak]).unwrap();
         assert_eq!(hit.manager, InstallSource::Deb);
         // 0.5.0-1 is the 0.5.0 release, not a pre-release of it.

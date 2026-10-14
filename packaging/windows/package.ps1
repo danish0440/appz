@@ -113,7 +113,7 @@ function New-InstallerArt([string] $BannerOut, [string] $DialogOut) {
   $apps = 'photoz', 'vectorz', 'filmz', 'lightz', 'pdfz', 'effectz',
     'designz', 'wordz', 'deckz', 'gridz', 'cadz', 'soundz', 'figz'
   $mark = [System.Drawing.Image]::FromFile((Join-Path $Root 'assets\app-icon\hicolor\256x256\apps\com.pintaz.appz.png'))
-  $wordmark = [System.Drawing.Image]::FromFile((Join-Path $Root 'docs\brand\artcraft-logo-white.png'))
+  $wordmark = [System.Drawing.Image]::FromFile((Join-Path $Root 'assets\z-brand\logo-white.png'))
   $icons = $apps | ForEach-Object { [System.Drawing.Image]::FromFile((Join-Path $Root "assets\app-icons\$_.png")) }
   # The site's label face; GDI+ draws a variable font at its default instance (Regular).
   $fonts = New-Object System.Drawing.Text.PrivateFontCollection

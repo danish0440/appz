@@ -178,6 +178,8 @@ def transform_text(text: str, up_id: str, launcher: bool, path: Path) -> str:
         line = rename_own(line, up_id)
         line = line.replace("ai.storyteller.", "com.pintaz.")
         line = line.replace("docs/brand/artcraft-", "assets/z-brand/")
+        line = line.replace("docs\\brand\\artcraft-", "assets\\z-brand\\")
+        line = line.replace("docs\\\\brand\\\\artcraft-", "assets\\\\z-brand\\\\")
         out.append(line)
     text = "\n".join(out)
     if path.suffix == ".tsv":

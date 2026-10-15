@@ -1,6 +1,6 @@
 rebrand artcraft-launcher -> AppZ
 about credit inserted in: NOT FOUND
-launcher patches: ['crates/core/src/feed.rs', 'crates/native/src/backend.rs', 'crates/core/src/version.rs', 'crates/core/src/details.rs', 'crates/core/src/catalog.rs', 'crates/ui-egui/src/dialogs.rs']
+launcher patches: ['crates/core/src/feed.rs', 'crates/native/src/backend.rs', 'crates/core/src/version.rs', 'crates/core/src/details.rs', 'crates/core/src/catalog.rs', 'crates/core/src/catalog.rs (order + colours)', 'crates/ui-egui/src/dialogs.rs']
 lines still naming ArtCraft/getartcraft/discord (non-doc): 52
 apps/appz/build.rs:19: .set("LegalCopyright", "Copyright (c) the ArtCraft Launcher authors. MIT OR Apache-2.0.")
 apps/appz/src/tray.rs:30: // The ArtCraft "A" mark (an ArtCraft trademark, not MIT/Apache: docs/brand/LICENSE-brand.txt).

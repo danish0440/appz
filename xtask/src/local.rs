@@ -26,12 +26,12 @@ const APPS: &[(&str, &str)] = &[
     ("pdfz", "PdfZ"),
     ("effectz", "EffectZ"),
     ("designz", "DesignZ"),
-    ("wordz", "WordZ"),
-    ("deckz", "DeckZ"),
-    ("gridz", "GridZ"),
-    ("cadz", "CadZ"),
-    ("soundz", "SoundZ"),
     ("figz", "FigZ"),
+    ("wordz", "WordZ"),
+    ("soundz", "SoundZ"),
+    ("deckz", "DeckZ"),
+    ("cadz", "CadZ"),
+    ("gridz", "GridZ"),
 ];
 
 const DEFAULT_PORT: u16 = 8787;

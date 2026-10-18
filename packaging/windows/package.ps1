@@ -111,7 +111,7 @@ function New-InstallerArt([string] $BannerOut, [string] $DialogOut) {
   $line = [System.Drawing.Color]::FromArgb(38, 242, 241, 238)
   # The Z App Suite, in the launcher's order (crates/core/src/catalog.rs).
   $apps = 'photoz', 'vectorz', 'filmz', 'lightz', 'pdfz', 'effectz',
-    'designz', 'wordz', 'deckz', 'gridz', 'cadz', 'soundz', 'figz'
+    'designz', 'figz', 'wordz', 'soundz', 'deckz', 'cadz', 'gridz'
   $mark = [System.Drawing.Image]::FromFile((Join-Path $Root 'assets\app-icon\hicolor\256x256\apps\com.pintaz.appz.png'))
   $wordmark = [System.Drawing.Image]::FromFile((Join-Path $Root 'assets\z-brand\logo-white.png'))
   $icons = $apps | ForEach-Object { [System.Drawing.Image]::FromFile((Join-Path $Root "assets\app-icons\$_.png")) }

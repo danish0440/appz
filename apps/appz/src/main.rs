@@ -39,6 +39,8 @@ fn main() -> ExitCode {
     logging::install_panic_hook();
     // Detect system language in the background so the first frame can use it.
     appz_ui_egui::i18n::detect_system_lang_in_background();
+    // Detect Discord protocol handler in the background without blocking startup.
+    appz_native::process::ensure_discord_detection_started();
     let args: Vec<String> = std::env::args().skip(1).collect();
     if args.iter().any(|a| a == "--version" || a == "-V") {
         println!("appz {}", env!("CARGO_PKG_VERSION"));
@@ -432,8 +434,20 @@ impl Host for DesktopHost {
         login::set_enabled(on)
     }
 
+    fn pick_folder(&mut self, initial: Option<&str>) -> Option<String> {
+        let mut dialog = rfd::FileDialog::new();
+        if let Some(folder) = initial.filter(|p| std::path::Path::new(p).is_dir()) {
+            dialog = dialog.set_directory(folder);
+        }
+        dialog.pick_folder().and_then(|p| p.to_str().map(str::to_string))
+    }
+
     fn reduce_motion(&self) -> bool {
         motion::reduced()
+    }
+
+    fn discord_url(&self) -> &'static str {
+        appz_native::process::discord_url()
     }
 
     fn quit(&mut self) {
@@ -541,7 +555,9 @@ impl Launcher {
                 tray::TrayAction::Check => self.ui.check_now(),
                 // Straight to the browser: works while the window is hidden in the tray.
                 tray::TrayAction::Open(url) => {
-                    if let Err(e) = appz_native::process::open(std::ffi::OsStr::new(url)) {
+                    if url == appz_core::catalog::DISCORD_APP_URL {
+                        appz_native::process::open_url_with_fallback(url, appz_core::catalog::DISCORD_URL);
+                    } else if let Err(e) = appz_native::process::open(std::ffi::OsStr::new(url)) {
                         log::warn!("couldn't open {url}: {e}");
                     }
                 }
@@ -704,6 +720,19 @@ impl eframe::App for Shell<'_> {
 
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         self.launcher.ui.ui(ui, &mut self.launcher.host);
+        ui.ctx().output_mut(|o| {
+            o.commands.retain(|cmd| {
+                // The Discord deep link goes to the system opener, falling back to the web invite;
+                // egui's own link handling only opens web pages.
+                if let egui::OutputCommand::OpenUrl(open_url) = cmd
+                    && open_url.url == appz_core::catalog::DISCORD_APP_URL
+                {
+                    appz_native::process::open_url_with_fallback(&open_url.url, appz_core::catalog::DISCORD_URL);
+                    return false;
+                }
+                true
+            });
+        });
     }
 
     fn raw_input_hook(&mut self, ctx: &egui::Context, raw_input: &mut egui::RawInput) {

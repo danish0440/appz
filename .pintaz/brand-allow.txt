@@ -1,0 +1,53 @@
+apps/appz/build.rs: .set("LegalCopyright", "Copyright (c) the ArtCraft Launcher authors. MIT OR Apache-2.0.")
+apps/appz/src/tray.rs: // The ArtCraft "A" mark (an ArtCraft trademark, not MIT/Apache: docs/brand/LICENSE-brand.txt).
+crates/core/src/catalog.rs: /// ArtCraft's social accounts: (service, URL). Shown as small icons, less prominent than Discord.
+crates/core/src/catalog.rs: /// ArtCraft's website.
+crates/core/src/catalog.rs: /// Brand colour (sRGB), for surfaces: getartcraft.com's `--app`.
+crates/core/src/catalog.rs: /// Deep link into the Discord application for the ArtCraft server invite.
+crates/core/src/catalog.rs: /// The Z App Suite, in display order matching getartcraft.com:
+crates/core/src/details.rs: /// Where every Z App runs (getartcraft.com lists the same for each of them).
+crates/core/src/feed.rs: /// [`GITHUB_OWNER`]: the feed can move an app within ArtCraft's account, never out of it.
+crates/core/src/feed.rs: pub const FEED_URL: &str = ""; // PINTAZ: ArtCraft release feed off (GitHub only)
+crates/core/src/protocol.rs: /// ArtCraft's release feed (storyteller-web), which polls GitHub for everyone.
+crates/core/src/protocol.rs: /// News and alerts from ArtCraft's release feed (replaces any earlier set).
+crates/native/src/backend.rs: // A check needs a client; with pre-releases on it asks only `Newer`, never ArtCraft's API.
+crates/native/src/backend.rs: /// Asks ArtCraft's release feed up to `attempts` times, as often as `throttle` allows (waiting at
+crates/native/src/backend.rs: /// How often ArtCraft's API may be called.
+crates/native/src/backend.rs: /// Looks up the latest releases: ArtCraft's release feed first (one request for every app),
+crates/native/src/backend.rs: /// the builds. Asked every check (it's on this machine), and never saved over ArtCraft's.
+crates/native/src/backend.rs: /// there (never GitHub or ArtCraft's API), and its download links are trusted. Loopback only, so
+crates/native/src/feed_throttle.rs: //! [`FeedThrottle`]: how often the launcher may call ArtCraft's API (the release feed).
+crates/native/src/feed_throttle.rs: /// The pacing state for ArtCraft's API. Times are Unix seconds, passed in so it can be tested.
+crates/native/src/http.rs: /// ArtCraft's release feed, or why it couldn't be read. Never takes more than ~10 seconds.
+crates/native/src/http.rs: /// ArtCraft's release feed: a short timeout, so a slow server never holds up a check.
+crates/native/src/http.rs: /// Why ArtCraft's release feed couldn't be read.
+crates/native/src/lib.rs: //! ArtCraft catalog API later.
+crates/native/src/paths.rs: /// How long to hold off calling ArtCraft's API (after failures or HTTP 429), across restarts.
+crates/native/src/paths.rs: /// The last answer from ArtCraft's release feed, for an instant first paint and as a fallback.
+crates/native/src/source.rs: //! checksum, which costs no API quota at all. A later [`ReleaseSource`] will ask the ArtCraft
+crates/ui-egui/src/app.rs: /// News from ArtCraft's release feed, shown inline until dismissed.
+crates/ui-egui/src/dialogs.rs: // PINTAZ-ABOUT: required credit (Apache-2.0 change notice; ArtCraft brand licence)
+crates/ui-egui/src/dialogs.rs: ui.weak("Based on ArtCraft Launcher by Storytold (ArtCraft), Apache-2.0. Changes by PINTAZ TECHNOLOGIES.");
+crates/ui-egui/src/icons.rs: /// An ArtCraft trademark, not covered by the MIT/Apache license (`docs/brand/LICENSE-brand.txt`).
+crates/ui-egui/src/icons.rs: /// The ArtCraft "A" mark in blue, as supplied: the launcher's app icon and getartcraft.com's favicon.
+crates/ui-egui/src/icons.rs: /// The ArtCraft wordmark's width / height (its SVG view box: 1038.05 × 108).
+crates/ui-egui/src/icons.rs: /// The ArtCraft wordmark, as supplied: dark ink for light backgrounds, white for dark ones.
+crates/ui-egui/src/settings.rs: /// How often to look. Checks ask ArtCraft's release feed (one cheap request; GitHub only as a
+crates/ui-egui/src/theme.rs: //! Colours, type and shapes, matching getartcraft.com: hard edges, hairline rules, Archivo
+crates/ui-egui/src/views.rs: // The ArtCraft wordmark exactly as supplied, in its own cell.
+crates/ui-egui/src/views.rs: //! getartcraft.com: hairline cells, mono labels and square controls.
+crates/ui-egui/src/views.rs: /// News from ArtCraft's release feed (and app renames), until the user dismisses each.
+crates/ui-egui/src/widgets.rs: //! Small building blocks in getartcraft.com's style: mono labels, square buttons, badges and
+crates/ui-egui/src/widgets.rs: /// ArtCraft's social accounts as a row of small monochrome icons (faint, brighter on hover).
+crates/ui-egui/tests/ui.rs: // The footer's ArtCraft links and each card's own pages.
+packaging/icons.sh: #   getartcraft.com's favicon.
+packaging/icons.sh: # Regenerate every app and tray icon from the ArtCraft "A" mark in docs/brand/, rendered exactly as
+packaging/icons.sh: # supplied. The mark is an ArtCraft trademark, NOT MIT/Apache: docs/brand/LICENSE-brand.txt.
+packaging/macos/Info.plist.in: <string>Copyright © 2026 ArtCraft Team and the ArtCraft Launcher contributors. MIT OR Apache-2.0.</string>
+packaging/windows/appz.wxs: <!-- Our own art, drawn by package.ps1 from the ArtCraft mark and the Craft apps' icons. -->
+packaging/windows/package.ps1: #     that stays white; the left panel is ours: the blue ArtCraft mark, the white wordmark, a mono
+packaging/windows/package.ps1: # ArtCraft rather than WiX's stock bitmaps. Both must be 24-bit BMPs:
+packaging/windows/package.ps1: # The ArtCraft mark and wordmark are drawn as supplied (docs/brand/LICENSE-brand.txt).
+packaging/windows/package.ps1: # The setup wizard's art, drawn here (System.Drawing) in getartcraft.com's style so the MSI shows
+xtask/src/local.rs: //!   shape as ArtCraft's) written fresh from whatever is in the mirror at that moment.
+xtask/src/local.rs: /// A feed (ArtCraft's `release_info` shape) for the newest complete version of every app.
